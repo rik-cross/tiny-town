@@ -1,0 +1,4 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/Fonts/Medium.spritefont","/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/bin/DesktopGL/Fonts/Medium.xnb","FontDescriptionProcessor","SpriteFontContent",2013,21538,0.4260949
+"/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/character.png","/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/bin/DesktopGL/images/character.xnb","TextureProcessor","Texture2DContent",2091,147541,0.0354633
+"/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/chest.png","/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/bin/DesktopGL/images/chest.xnb","TextureProcessor","Texture2DContent",1774,92245,0.0145869
