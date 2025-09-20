@@ -72,13 +72,25 @@ public class GameScene : Scene
         chestEntity.GetComponent<SpriteComponent>().AddSprite(
             sprite: new Sprite(
                 textureList: new List<Texture2D>() {
+                    chestImagesList[0][0]
+                },
+                resizeToEntity: false,
+                scale: new Vector2(3, 3),
+                offset: new Vector2(16 * 3, 18 * 3)
+            ),
+            state: "closed"
+        );
+
+        chestEntity.GetComponent<SpriteComponent>().AddSprite(
+            sprite: new Sprite(
+                textureList: new List<Texture2D>() {
                     chestImagesList[0][0],
                     chestImagesList[0][1],
                     chestImagesList[0][2],
                     chestImagesList[0][3]
                 },
                 resizeToEntity: false,
-                duration: 0.6f,
+                duration: 0.4f,
                 scale: new Vector2(3, 3),
                 offset: new Vector2(16 * 3, 18 * 3),
                 loop: false
@@ -86,8 +98,13 @@ public class GameScene : Scene
             state: "open"
         );
 
-        chestEntity.State = "open";
+        chestEntity.State = "closed";
         AddEntity(chestEntity);
+
+        AddTimedAction(
+            1500,
+            (GameTime gameTime) => { chestEntity.State = "open"; }
+        );
 
         instructionText = new Text(
             caption: "WASD = change camera world center, 1/2/3 = zoom level",

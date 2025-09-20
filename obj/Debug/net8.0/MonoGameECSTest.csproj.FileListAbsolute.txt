@@ -35,3 +35,4 @@
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/Fonts/Medium.xnb
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/character.xnb
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/chest.xnb
+/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/obj/Debug/net8.0/MonoGameECSTest.sourcelink.json
