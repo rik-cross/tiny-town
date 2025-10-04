@@ -5,10 +5,12 @@
   <Config />
   <SourceFiles>
     <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/Fonts/Medium.spritefont</File>
-    <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/character.png</File>
-    <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/chest.png</File>
+    <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/Maps/Village.tmx</File>
+    <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/milk.png</File>
+    <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/player.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

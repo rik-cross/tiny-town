@@ -1,8 +1,8 @@
 using System;
 using System.Data;
 using Microsoft.Xna.Framework;
-using MonoGameECS;
-using MonoGameECS.Transitions;
+using milk;
+using milk.Transitions;
 using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
@@ -16,7 +16,7 @@ public class PauseScene : Scene
     public override void Init()
     {
         // Semi-transparent black background
-        backgroundColor = Color.Black * 0.75f;
+        BackgroundColor = Color.Black * 0.75f;
 
         instructionText = new Text(
             caption: "Paused! Press [Esc]",
@@ -27,7 +27,8 @@ public class PauseScene : Scene
             outlineWidth: 3
         );
 
-        UpdateSceneBelow = false;
+        InputSceneBelow = false;
+        UpdateSceneBelow = true;
 
     }
 

@@ -34,5 +34,15 @@
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/MonoGame.Extended.dll
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/Fonts/Medium.xnb
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/character.xnb
-/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/chest.xnb
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/obj/Debug/net8.0/MonoGameECSTest.sourcelink.json
+/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/player.xnb
+/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/milk.xnb
+/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Autofac.dll
+/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/MonoGame.Extended.Content.Pipeline.dll
+/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/Maps/Village.xnb
+/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/Tiles/Grass_Tile_Layers_0.xnb
+/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/Tiles/Grass_Tile_Layers_1.xnb
+/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/Tiles/Soil_Ground_Tiles_0.xnb
+/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/Tiles/SproutLandsTiles_0.xnb
+/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/Tiles/Water Objects_0.xnb
+/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/Tiles/Water Objects_1.xnb

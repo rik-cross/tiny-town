@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
-using MonoGameECS;
+using milk;
 
 // Create a new game object
-using var game = new MonoGameECS.Game(
-    title: "MonoGame ECS Example",
+using var game = new milk.Game(
+    title: "Tiny Town",
     size: new Vector2(1280, 720)
 );
 
@@ -12,4 +12,3 @@ game.Init = () => { game.SetScene(scene: new GameScene()); };
 
 // Run the game
 game.Run();
-

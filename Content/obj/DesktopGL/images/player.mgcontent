@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/character.png</SourceFile>
-  <SourceTime>2024-07-25T16:20:50+01:00</SourceTime>
-  <DestFile>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/bin/DesktopGL/images/character.xnb</DestFile>
-  <DestTime>2025-09-18T17:02:14.2516924+01:00</DestTime>
+  <SourceFile>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/player.png</SourceFile>
+  <SourceTime>2024-07-06T23:07:48+01:00</SourceTime>
+  <DestFile>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/bin/DesktopGL/images/player.xnb</DestFile>
+  <DestTime>2025-09-27T15:03:43.2434655+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-16T18:05:56+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
