@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.1-99-gec89c545" orientation="orthogonal" renderorder="right-down" width="7" height="5" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="1">
+ <tileset firstgid="1" source="../Tiles/Wooden_House_Roof_Tilset.tsx"/>
+ <tileset firstgid="36" source="../Tiles/Wooden_House_Walls_Tilset.tsx"/>
+ <tileset firstgid="51" source="Wooden_House_Walls_Tilset.tsx"/>
+ <tileset firstgid="66" source="door animation sprites.tsx"/>
+ <layer id="2" name="walls" width="7" height="5">
+  <data encoding="csv">
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+61,64,62,71,62,64,63
+</data>
+ </layer>
+ <layer id="1" name="roof" width="7" height="5">
+  <data encoding="csv">
+1,2,2,2,2,2,3,
+8,18,19,20,9,6,10,
+15,25,26,27,28,16,17,
+22,32,33,34,35,23,24,
+29,30,30,30,30,30,31
+</data>
+ </layer>
+</map>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/Maps/../Tiles/door animation sprites.png</SourceFile>
+  <SourceTime>2022-01-18T11:59:02+00:00</SourceTime>
+  <DestFile>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/bin/DesktopGL/images/Tiles/door animation sprites_0.xnb</DestFile>
+  <DestTime>2025-10-20T16:50:43.794625+01:00</DestTime>
+  <Importer>TextureImporter</Importer>
+  <ImporterTime>2024-08-16T18:05:56+01:00</ImporterTime>
+  <Processor>TextureProcessor</Processor>
+  <ProcessorTime>2024-08-16T18:05:56+01:00</ProcessorTime>
+  <Parameters>
+    <Key>ColorKeyColor</Key>
+    <Value>0,0,0,0</Value>
+  </Parameters>
+  <Parameters>
+    <Key>ColorKeyEnabled</Key>
+    <Value>True</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

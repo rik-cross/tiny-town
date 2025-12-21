@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.1-99-gec89c545" orientation="orthogonal" renderorder="right-down" width="13" height="9" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="2">
+ <tileset firstgid="1" source="../Tiles/SproutLandsTiles.tsx"/>
+ <tileset firstgid="78" source="../Tiles/Grass_Tile_Layers.tsx"/>
+ <tileset firstgid="155" source="../Tiles/Water Objects.tsx"/>
+ <tileset firstgid="179" source="Wooden_House_Walls_Tilset.tsx"/>
+ <tileset firstgid="194" source="door animation sprites.tsx"/>
+ <layer id="5" name="floor" width="13" height="9">
+  <properties>
+   <property name="belowEntities" value="true"/>
+  </properties>
+  <data encoding="csv">
+185,185,185,185,185,185,185,185,185,185,185,185,185,
+185,185,185,185,185,185,185,185,185,185,185,185,185,
+185,185,185,185,185,185,185,185,185,185,185,185,185,
+185,185,185,185,185,185,185,185,185,185,185,185,185,
+185,185,185,185,185,185,185,185,185,185,185,185,185,
+185,185,185,185,185,185,185,185,185,185,185,185,185,
+185,185,185,185,185,185,185,185,185,185,185,185,185,
+185,185,185,185,185,185,185,185,185,185,185,185,185,
+185,185,185,185,185,185,185,185,185,185,185,185,185
+</data>
+ </layer>
+ <layer id="1" name="walls_below" width="13" height="9">
+  <properties>
+   <property name="belowEntities" value="true"/>
+  </properties>
+  <data encoding="csv">
+182,180,180,180,180,180,180,180,180,180,180,180,183,
+186,0,0,0,0,0,0,0,0,0,0,0,184,
+186,0,0,0,0,0,0,0,0,0,0,0,184,
+186,0,0,0,0,0,0,0,0,0,0,0,184,
+186,0,0,0,0,0,0,0,0,0,0,0,184,
+186,0,0,0,0,0,0,0,0,0,0,0,184,
+186,0,0,0,0,0,0,0,0,0,0,0,184,
+186,0,0,0,0,0,0,0,0,0,0,0,184,
+0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="6" name="walls_above" width="13" height="9">
+  <properties>
+   <property name="belowEntities" value="false"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+187,190,192,190,190,190,199,190,190,190,192,190,188
+</data>
+ </layer>
+</map>

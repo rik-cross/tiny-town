@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MonoGameECSTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+24258dbe6e39ab9fa3292cae2fca3f1de867d85c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e9d4da8bde43c1a06a7d716cd202979d0323f32e")]
 [assembly: System.Reflection.AssemblyProductAttribute("MonoGameECSTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MonoGameECSTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

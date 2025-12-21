@@ -1,10 +1,6 @@
-using System;
-using System.Data;
 using Microsoft.Xna.Framework;
-using milk;
+using milk.Core;
 using milk.Transitions;
-using System.Collections;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -19,7 +15,7 @@ public class PauseScene : Scene
         BackgroundColor = Color.Black * 0.75f;
 
         instructionText = new Text(
-            caption: "Paused! Press [Esc]",
+            caption: "Paused! Press [P]",
             font: content.Load<SpriteFont>("Fonts/Medium"),
             position: Middle,
             anchor: Anchor.MiddleCenter,
@@ -28,17 +24,25 @@ public class PauseScene : Scene
         );
 
         InputSceneBelow = false;
-        UpdateSceneBelow = true;
+        UpdateSceneBelow = false;
 
     }
 
-    public override void Input(GameTime gameTime) {
-        // Press [Esc] to move back to the previous scene
-        if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+    public override void Input(GameTime gameTime)
+    {
+        
+        // Press [P] to move back to the previous scene
+        if (game.inputManager.IsKeyPressed(Keys.P))
             game.RemoveScene(new TransitionFadeIn(duration: 100));
+
+        // Press [Q] to quit
+        if (game.inputManager.IsKeyPressed(Keys.Escape))
+            game.Quit();
+
     }
 
-    public override void Draw() {
+    public override void Draw()
+    {
         instructionText.Draw();
     }
 

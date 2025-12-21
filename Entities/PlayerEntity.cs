@@ -1,10 +1,9 @@
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using milk;
-using milk.Transitions;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
+using milk.Core;
+using milk.Components;
 
 public static class PlayerEntity
 {
@@ -16,22 +15,23 @@ public static class PlayerEntity
         // Position
         //
 
-        TransformComponent transformComponent = entity.GetComponent<TransformComponent>();
+        PhysicsComponent physicsComponent = entity.GetComponent<PhysicsComponent>();
 
         float dx = 0;
         float dy = 0;
 
-        if (Keyboard.GetState().IsKeyDown(Keys.W))
-            dy -= 1;
-        if (Keyboard.GetState().IsKeyDown(Keys.A))
-            dx -= 1;
-        if (Keyboard.GetState().IsKeyDown(Keys.S))
-            dy += 1;
-        if (Keyboard.GetState().IsKeyDown(Keys.D))
-            dx += 1;
+        float speed = 50.0f;
 
-        transformComponent.X += dx;
-        transformComponent.Y += dy;
+        if (scene.game.inputManager.IsKeyDown(Keys.W))
+            dy -= speed;
+        if (scene.game.inputManager.IsKeyDown(Keys.A))
+            dx -= speed;
+        if (scene.game.inputManager.IsKeyDown(Keys.S))
+            dy += speed;
+        if (scene.game.inputManager.IsKeyDown(Keys.D))
+            dx += speed;
+
+        physicsComponent.Velocity = new Vector2(dx, dy);
 
         //
         // State
@@ -59,18 +59,32 @@ public static class PlayerEntity
 
     }
 
-    public static Texture2D playerSpriteSheet = milk.EngineGlobals.game.Content.Load<Texture2D>("images/player");
-    public static List<List<Texture2D>> playerImagesList = milk.Utilities.SplitTexture(playerSpriteSheet, new Vector2(48, 48));
+    public static Texture2D playerSpriteSheet = EngineGlobals.game.Content.Load<Texture2D>("images/player");
+    public static List<List<Texture2D>> playerImagesList = Utilities.SplitTexture(playerSpriteSheet, new Vector2(48, 48));
 
 
-    public static milk.Entity Create()
+    public static Entity Create()
     {
-        milk.Entity playerEntity = new milk.Entity();
+        Entity playerEntity = new Entity(name: "player");
 
         playerEntity.AddComponent(
             new TransformComponent(
                 position: new Vector2(16 * 16 - 7, 16 * 16 - 8),
                 size: new Vector2(14, 16)
+            )
+        );
+
+        playerEntity.AddComponent(
+            new ColliderComponent(
+                size: new Vector2(10, 4),
+                offset: new Vector2(2, 12)
+            )
+        );
+
+        playerEntity.AddComponent(
+            new TriggerComponent(
+                size: new Vector2(14, 16),
+                offset: new Vector2(0, 0)
             )
         );
 
@@ -90,7 +104,7 @@ public static class PlayerEntity
                 },
                 resizeToEntity: false,
                 duration: 0.6f,
-                offset: new Vector2(17, 16)
+                offset: new Vector2(-17, -16)
             ),
             state: "idle_up"
         );
@@ -109,7 +123,7 @@ public static class PlayerEntity
                 },
                 resizeToEntity: false,
                 duration: 0.6f,
-                offset: new Vector2(17, 16)
+                offset: new Vector2(-17, -16)
             ),
             state: "idle_down"
         );
@@ -128,7 +142,7 @@ public static class PlayerEntity
                 },
                 resizeToEntity: false,
                 duration: 0.6f,
-                offset: new Vector2(17, 16)
+                offset: new Vector2(-17, -16)
             ),
             state: "idle_left"
         );
@@ -147,7 +161,7 @@ public static class PlayerEntity
                 },
                 resizeToEntity: false,
                 duration: 0.6f,
-                offset: new Vector2(17, 16)
+                offset: new Vector2(-17, -16)
             ),
             state: "idle_right"
         );
@@ -166,7 +180,7 @@ public static class PlayerEntity
                 },
                 resizeToEntity: false,
                 duration: 0.6f,
-                offset: new Vector2(17, 16)
+                offset: new Vector2(-17, -16)
             ),
             state: "walk_up"
         );
@@ -185,7 +199,7 @@ public static class PlayerEntity
                 },
                 resizeToEntity: false,
                 duration: 0.6f,
-                offset: new Vector2(17, 16)
+                offset: new Vector2(-17, -16)
             ),
             state: "walk_down"
         );
@@ -204,7 +218,7 @@ public static class PlayerEntity
                 },
                 resizeToEntity: false,
                 duration: 0.6f,
-                offset: new Vector2(17, 16)
+                offset: new Vector2(-17, -16)
             ),
             state: "walk_left"
         );
@@ -223,10 +237,12 @@ public static class PlayerEntity
                 },
                 resizeToEntity: false,
                 duration: 0.6f,
-                offset: new Vector2(17, 16)
+                offset: new Vector2(-17, -16)
             ),
             state: "walk_right"
         );
+
+        playerEntity.AddComponent(new PhysicsComponent());
 
         playerEntity.AddComponent(new InputComponent(PlayerInputController));
 

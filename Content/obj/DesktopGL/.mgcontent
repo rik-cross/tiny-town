@@ -5,11 +5,17 @@
   <Config />
   <SourceFiles>
     <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/Fonts/Medium.spritefont</File>
+    <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/house.png</File>
+    <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/Maps/House.tmx</File>
     <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/Maps/Village.tmx</File>
     <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/milk.png</File>
     <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/player.png</File>
+    <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/tree.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
