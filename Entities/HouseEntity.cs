@@ -14,10 +14,10 @@ public static class HouseEntity
 {
 
     public static Texture2D houseSpriteTexture = EngineGlobals.game.Content.Load<Texture2D>("images/house");
-    //public static List<List<Texture2D>> houseImagesList = milk.Utilities.SplitTexture(houseSpriteSheet, new Vector2(48, 48));
-
+   
     public static Entity Create(Vector2 position)
     {
+        
         Entity houseEntity = new Entity();
 
         houseEntity.AddComponent(
@@ -69,6 +69,7 @@ public static class HouseEntity
         houseEntity.State = "default";
 
         return houseEntity;
+
     }
 
 }

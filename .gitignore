@@ -1,0 +1,19 @@
+# --- Build Outputs ---
+[Bb]in/
+[Oo]bj/
+
+# --- MonoGame Content Pipeline ---
+# Ignore the temporary build artifacts for assets
+Content/bin/
+Content/obj/
+.mgcb/
+
+# --- IDE & OS ---
+.vs/
+.vscode/
+.idea/
+*.user
+*.userosscache
+*.suo
+.DS_Store
+Thumbs.db

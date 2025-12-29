@@ -1,5 +1,13 @@
+//   Tiny Town, By Rik Cross
+//   -- Code: github.com/rik-cross/tiny-town
+//   -- Shared under the MIT licence
+//   Uses the milk MonoGame ECS engine
+//   -- Docs: rik-cross.github.io/monogame-milk
+
+// The info scene displays some 'credits', inculding
+// the MonoGame milk engine and various assets used
+
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using milk.Core;
 using milk.UI;
 using milk.Transitions;
@@ -7,6 +15,7 @@ using milk.Transitions;
 public class InfoScene : Scene
 {
 
+    // The text displayed is split into lines
     Text infoLine1;
     Text infoLine2;
     Text infoLine3;
@@ -15,6 +24,7 @@ public class InfoScene : Scene
 
     public override void Init()
     {
+
         BackgroundColor = GameSettings.darkBrown;
 
         infoLine1 = new Text(
@@ -32,7 +42,7 @@ public class InfoScene : Scene
         );
 
         infoLine3 = new Text(
-            caption: "rik-cross.github.com/monogame-milk",
+            caption: "rik-cross.github.io/monogame-milk",
             anchor: Anchor.MiddleCenter,
             position: new Vector2(Middle.X, 280),
             color: GameSettings.primaryTextColor
@@ -62,7 +72,9 @@ public class InfoScene : Scene
             onSelected: (UIElement element, Scene scene) =>
             {
                 game.RemoveScene(
-                    transition: new TransitionFadeToBlack(duration: 500)
+                    transition: new TransitionFadeToBlack(
+                        duration: GameSettings.sceneTransitionDuration
+                    )
                 );
             }
         );
@@ -73,6 +85,7 @@ public class InfoScene : Scene
 
     public override void Draw()
     {
+        // Draw the lines of text
         infoLine1.Draw();
         infoLine2.Draw();
         infoLine3.Draw();

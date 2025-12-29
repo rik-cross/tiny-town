@@ -4,27 +4,33 @@
 //   Uses the milk MonoGame ECS engine
 //   -- Docs: rik-cross.github.io/monogame-milk
 
-using System;
+// The menu scene is designed to be overlayed onto a game
+// scene, and includes a title, ome info text and buttons
+// for starting a game, displaying some credits and exiting.
+
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using milk.Core;
-using milk.UI;
 using milk.Transitions;
-using MonoGame.Extended.Screens.Transitions;
+using milk.UI;
 
 public class MenuScene : Scene
 {
 
-    Text titleText;
-    Text versionText;
-    Text milkText;
-    Image milkImage;
+    // 'Tiny Town' title
+    Text txtTitle;
+
+    // Game version text
+    Text txtVersion;
+
+    // The 'made with milk' text and logo
+    Text txtMilk;
+    Image imgMilk;
 
     public override void Init()
     {
 
-        titleText = new Text(
+        txtTitle = new Text(
             caption: "Tiny Town",
             anchor: Anchor.TopCenter,
             font: game._engineResources.FontLarge,
@@ -34,7 +40,7 @@ public class MenuScene : Scene
             outlineColor: Color.Black
         );
 
-        versionText = new Text(
+        txtVersion = new Text(
             caption: "Tiny Town v0.1",
             anchor: Anchor.BottomLeft,
             position: new Vector2(20, Size.Y - 5),
@@ -43,7 +49,7 @@ public class MenuScene : Scene
             outlineColor: Color.Black
         );
 
-        milkText = new Text(
+        txtMilk = new Text(
             caption: "Made with milk",
             anchor: Anchor.BottomCenter,
             position: new Vector2(Size.X - 95, Size.Y - 5),
@@ -52,15 +58,16 @@ public class MenuScene : Scene
             outlineColor: Color.Black
         );
 
-        milkImage = new Image(
+
+        imgMilk = new Image(
             texture: game._engineResources.ImgMilk,
             size: new Vector2(205 / 8, 265 / 8),
             position: new Vector2(Size.X - 200, Size.Y - 13),
             anchor: Anchor.BottomCenter
         );
 
-        // test
-        Button newGame = new Button(
+        // Start the game
+        Button btnPlay = new Button(
             caption: "Play",
             anchor: Anchor.TopCenter,
             position: new Vector2(Middle.X, Middle.Y + 120),
@@ -70,63 +77,74 @@ public class MenuScene : Scene
             onSelected: (UIElement element, Scene scene) =>
             {
                 GameAssets.villageScene.GetCameraByName("main camera").SetZoom(4.5f, 2.0f);
-                game.RemoveScene(transition: new TransitionFadeIn(duration: 500));
+                game.RemoveScene(transition: new TransitionFadeIn(
+                    duration: GameSettings.sceneTransitionDuration)
+                );
             }
         );
 
-        // test
-        Button info = new Button(
-            caption: "Info",
+        // Display some game credits
+        Button btnCredits = new Button(
+            caption: "Credits",
             anchor: Anchor.TopCenter,
-            position: new Vector2(0, newGame.Height + 10),
+            position: new Vector2(0, btnPlay.Height + GameSettings.buttonSpacing),
             size: GameSettings.ButtonSize,
             foregroundColor: GameSettings.primaryTextColor,
-            parent: newGame,
+            parent: btnPlay,
             customDrawMethod: GameUI.DrawButton,
             onSelected: (UIElement element, Scene scene) =>
             {
                 game.SetScene(
                     GameAssets.infoScene,
-                    transition: new TransitionFadeToBlack(duration: 500),
+                    transition: new TransitionFadeToBlack(
+                        duration: GameSettings.sceneTransitionDuration
+                    ),
                     keepExistingScenes: true
                 );
             }
         );
 
-        // test
-        Button quit = new Button(
+        // Exit the game
+        Button btnQuit = new Button(
             caption: "Quit",
             anchor: Anchor.TopCenter,
-            position: new Vector2(0, info.Height + 10),
+            position: new Vector2(0, btnCredits.Height + GameSettings.buttonSpacing),
             size: GameSettings.ButtonSize,
             foregroundColor: GameSettings.primaryTextColor,
-            parent: info,
+            parent: btnCredits,
             customDrawMethod: GameUI.DrawButton,
             onSelected: (UIElement element, Scene scene) => { EngineGlobals.game.Exit(); }
         );
 
-        newGame.ElementBelow = info;
-        info.ElementBelow = quit;
+        // Link the buttons in the menu
+        btnPlay.ElementBelow = btnCredits;
+        btnCredits.ElementBelow = btnQuit;
 
-        AddUIElement(newGame);
-        AddUIElement(info);
-        AddUIElement(quit);
+        // Add the buttons to the menu
+        AddUIElement(btnPlay);
+        AddUIElement(btnCredits);
+        AddUIElement(btnQuit);
 
     }
 
     public override void Input(GameTime gameTime)
     {
-        // Press [Esc] to quit
+
+        // Pressing [Esc] also quits the game
         if (game.inputManager.IsKeyPressed(Keys.Escape))
             game.Quit();
+    
     }
 
     public override void Draw()
     {
-        titleText.Draw();
-        versionText.Draw();
-        milkText.Draw();
-        milkImage.Draw();
+    
+        // Draw the scene title, text and image
+        txtTitle.Draw();
+        txtVersion.Draw();
+        txtMilk.Draw();
+        imgMilk.Draw();
+    
     }
 
 }
