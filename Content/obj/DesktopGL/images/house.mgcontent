@@ -3,7 +3,7 @@
   <SourceFile>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/house.png</SourceFile>
   <SourceTime>2025-10-18T10:11:05.839078+01:00</SourceTime>
   <DestFile>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/bin/DesktopGL/images/house.xnb</DestFile>
-  <DestTime>2025-10-20T16:50:43.6456268+01:00</DestTime>
+  <DestTime>2025-12-28T17:54:35.95377+00:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-16T18:05:56+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

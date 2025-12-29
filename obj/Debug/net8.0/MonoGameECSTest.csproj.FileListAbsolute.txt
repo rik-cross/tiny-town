@@ -1,11 +1,9 @@
-/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/Fonts/Medium.xnb
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/character.xnb
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/house.xnb
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/Maps/door animation sprites_0.xnb
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/Maps/House.xnb
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/Maps/Village.xnb
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/Maps/Wooden_House_Walls_Tilset_0.xnb
-/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/milk.xnb
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/player.xnb
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/Tiles/door animation sprites_0.xnb
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/Tiles/Grass_Tile_Layers_0.xnb
@@ -39,9 +37,6 @@
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/runtimes/linux-x64/native/libSDL2-2.0.so.0
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/runtimes/osx/native/libSDL2-2.0.0.dylib
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/runtimes/win-x64/native/SDL2.dll
-/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/MonoGameECS.dll
-/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/MonoGameECS.pdb
-/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/MonoGameECS.xml
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/obj/Debug/net8.0/MonoGameECSTest.csproj.AssemblyReference.cache
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/obj/Debug/net8.0/MonoGameECSTest.GeneratedMSBuildEditorConfig.editorconfig
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/obj/Debug/net8.0/MonoGameECSTest.AssemblyInfoInputs.cache
@@ -54,3 +49,8 @@
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/obj/Debug/net8.0/MonoGameECSTest.pdb
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/obj/Debug/net8.0/MonoGameECSTest.genruntimeconfig.cache
 /home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/obj/Debug/net8.0/ref/MonoGameECSTest.dll
+/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/UI/buttons.xnb
+/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/Content/images/UI/indicators.xnb
+/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/milk.dll
+/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/milk.pdb
+/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/bin/Debug/net8.0/milk.xml

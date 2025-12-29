@@ -1,29 +1,40 @@
+//   Tiny Town, By Rik Cross
+//   -- Code: github.com/rik-cross/tiny-town
+//   -- Shared under the MIT licence
+//   Uses the milk MonoGame ECS engine
+//   -- Docs: rik-cross.github.io/monogame-milk
+
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using milk.Core;
 using milk.Transitions;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-
+using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Tiled;
-using MonoGame.Extended.Tiled.Renderers;
+using milk.UI;
+using System;
+using System.Linq.Expressions;
+using milk.Components;
 
-public class HouseScene : Scene
+
+public class GameScene : Scene
 {
-
     public override void Init()
     {
 
         BackgroundColor = Color.CornflowerBlue;
-        Map = content.Load<TiledMap>("images/Maps/House");
+        Map = content.Load<TiledMap>("images/Maps/Village");
         EntitySortMethod = EntitySortMethods.SortBottom;
 
         // Add player
-        //milk.Entity player = PlayerEntity.Create();
-        // TODO: move the player between scenes
-        //AddEntity(GameAssets.playerEntity);
+        AddEntity(GameAssets.playerEntity);
+
+        // Add a house
+        AddEntity(HouseEntity.Create(new Vector2(107, 104)));
+
+        // Add trees
+        AddEntity(TreeEntity.Create(new Vector2(210, 140)));
+        AddEntity(TreeEntity.Create(new Vector2(230, 120)));
 
         //
         // Add cameras
@@ -34,33 +45,19 @@ public class HouseScene : Scene
                 screenSize: Size,
                 backgroundColor: new Color(155, 212, 195),
                 clampToMap: true,
-                worldPosition: new Vector2(16 * 16, 16 * 16),
+                //worldPosition: new Vector2(50, 350), -- // TODO, doesn't work
                 name: "main camera",
-                zoom: 4.0f
+                zoom: 1.3f,
+                trackedEntity: GameAssets.playerEntity,
+                followPercentage: 0.05f
             )
         );
-
-        AddEntity(
-            TriggerEntity.Create(
-                position: new Vector2(16 * 6, 16 * 8 + 8),
-                size: new Vector2(16, 8),
-                onCollisionEnter: (Entity entity1, Entity entity2, float distance) =>
-                {
-                    GameUtils.ChangePlayerScene(
-                        fromScene: this,
-                        toScene: GameAssets.villageScene,
-                        playerPosition: new Vector2(16 * 9 + 1, 16 * 11),
-                        playerState: "idle_down"
-                    );
-                }
-            )
-        );
-
+        
     }
 
     public override void Input(GameTime gameTime)
     {
-
+        
         //
         // Main camera controls
         //
@@ -81,8 +78,8 @@ public class HouseScene : Scene
         // Scene controls
         //
 
-        // Press [P] to 'pause'
-        if (game.inputManager.IsKeyPressed(Keys.P))
+        // Press [Esc] to 'pause'
+        if (game.inputManager.IsKeyPressed(Keys.Escape))
         {
             game.SetScene(
                 new PauseScene(),
@@ -90,10 +87,6 @@ public class HouseScene : Scene
                 keepExistingScenes: true
             );
         }
-
-        // Press [Escape] to quit
-        if (game.inputManager.IsKeyPressed(Keys.Escape))
-            game.Quit();
 
     }
 

@@ -12,7 +12,8 @@
           "MonoGame.Extended": "4.0.3",
           "MonoGame.Extended.Content.Pipeline": "4.0.0",
           "MonoGame.Framework.DesktopGL": "3.8.4",
-          "MonoGameECS": "1.0.0"
+          "monogame-milk": "0.1.3",
+          "milk": "0.1.3.0"
         },
         "runtime": {
           "MonoGameECSTest.dll": {}
@@ -147,14 +148,22 @@
       },
       "System.Memory/4.5.3": {},
       "System.ValueTuple/4.5.0": {},
-      "MonoGameECS/1.0.0": {
+      "monogame-milk/0.1.3": {
         "dependencies": {
           "MonoGame.Extended": "4.0.3",
           "MonoGame.Extended.Content.Pipeline": "4.0.0",
           "MonoGame.Framework.DesktopGL": "3.8.4"
         },
         "runtime": {
-          "MonoGameECS.dll": {}
+          "milk.dll": {}
+        }
+      },
+      "milk/0.1.3.0": {
+        "runtime": {
+          "milk.dll": {
+            "assemblyVersion": "0.1.3.0",
+            "fileVersion": "0.1.3.0"
+          }
         }
       }
     }
@@ -235,8 +244,13 @@
       "path": "system.valuetuple/4.5.0",
       "hashPath": "system.valuetuple.4.5.0.nupkg.sha512"
     },
-    "MonoGameECS/1.0.0": {
+    "monogame-milk/0.1.3": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "milk/0.1.3.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

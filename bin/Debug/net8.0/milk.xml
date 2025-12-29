@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>MonoGameECS</name>
+        <name>milk</name>
     </assembly>
     <members>
         <member name="T:milk.Components.ColliderComponent">
@@ -671,7 +671,7 @@
             Setting debug mode to true displays various game, scene and entity information.
             </summary>
         </member>
-        <member name="M:milk.Core.Game.#ctor(System.String,System.Nullable{Microsoft.Xna.Framework.Vector2},System.Boolean,System.Int32,System.Int32,System.Boolean)">
+        <member name="M:milk.Core.Game.#ctor(System.String,System.Nullable{Microsoft.Xna.Framework.Vector2},System.Boolean,System.Int32,System.Int32,System.Boolean,System.Boolean)">
             <summary>
             Creates a new game.
             </summary>
@@ -680,6 +680,7 @@
             <param name="isMouseVisible">Sets mouse visibility (default = true).</param>
             <param name="maxEntities">The maximum number of game entities (default = 1024).</param>
             <param name="maxComponents">The maximum number of game components (default = 128).</param>
+            <param name="showSplash">Choose to show the milk splash scene (default = true).</param>
             <param name="debug">Sets debug mode (default = false).</param>
         </member>
         <member name="M:milk.Core.Game.Initialize">
@@ -698,6 +699,12 @@
             All systems must be registered before use.
             </summary>
             <param name="system">The system to register.</param>
+        </member>
+        <member name="M:milk.Core.Game.GetCurrentScene">
+            <summary>
+            Returns the current top scene in the scene stack.
+            </summary>
+            <returns>The current top scene in the scene stack.</returns>
         </member>
         <member name="M:milk.Core.Game.SetScene(milk.Core.Scene,milk.Core.Transition,System.Boolean)">
             <summary>
@@ -1032,6 +1039,12 @@
             </summary>
             <param name="name">The name of the action to remove.</param>
         </member>
+        <member name="M:milk.Core.Scene.AddUIElement(milk.UI.UIElement)">
+            <summary>
+            Add a UI element to the scene.
+            </summary>
+            <param name="element">The element to add.</param>
+        </member>
         <member name="M:milk.Core.Scene.Init">
             <summary>
             Called once when a scene is created.
@@ -1083,7 +1096,57 @@
         </member>
         <member name="T:milk.Core.SceneRenderable">
             <summary>
-            Used as a superclass for images, text, etc.
+            Used as a superclass for images, text, UI, etc.
+            </summary>
+        </member>
+        <member name="P:milk.Core.SceneRenderable.Width">
+            <summary>
+            The width.
+            </summary>
+        </member>
+        <member name="P:milk.Core.SceneRenderable.Height">
+            <summary>
+            The height.
+            </summary>
+        </member>
+        <member name="P:milk.Core.SceneRenderable.X">
+            <summary>
+            The x position.
+            </summary>
+        </member>
+        <member name="P:milk.Core.SceneRenderable.Y">
+            <summary>
+            The y position.
+            </summary>
+        </member>
+        <member name="P:milk.Core.SceneRenderable.Top">
+            <summary>
+            The top (y) position.
+            </summary>
+        </member>
+        <member name="P:milk.Core.SceneRenderable.Middle">
+            <summary>
+            The middle (y + 1/2 height).
+            </summary>
+        </member>
+        <member name="P:milk.Core.SceneRenderable.Bottom">
+            <summary>
+            The bottom (y + height).
+            </summary>
+        </member>
+        <member name="P:milk.Core.SceneRenderable.Left">
+            <summary>
+            The left (x) position.
+            </summary>
+        </member>
+        <member name="P:milk.Core.SceneRenderable.Center">
+            <summary>
+            The center (x + 1/2 width).
+            </summary>
+        </member>
+        <member name="P:milk.Core.SceneRenderable.Right">
+            <summary>
+            The right (x + width).
             </summary>
         </member>
         <member name="T:milk.Core.Sprite">
@@ -1337,7 +1400,7 @@
             Create a new next object.
             </summary>
             <param name="caption">The text to display.</param>
-            <param name="font">The font to use to render the text.</param>
+            <param name="font">The font to use to render the text (default = null - FontSmall).</param>
             <param name="position">The (x, y) text position (default = (0,0)).</param>
             <param name="alpha">The amount of transparency, between 0 and 1 (default = 1 - fully visible).</param>
             <param name="color">The text color.</param>
@@ -1532,6 +1595,89 @@
             </summary>
             <param name="scene">The scene containing the system.</param>
             <param name="entity">The entity to be processed.</param>
+        </member>
+        <member name="T:milk.UI.Button">
+            <summary>
+            A button ties an area of the screen with callbacks.
+            </summary>
+        </member>
+        <member name="M:milk.UI.Button.#ctor(System.String,Microsoft.Xna.Framework.Graphics.SpriteFont,System.Nullable{Microsoft.Xna.Framework.Vector2},System.Nullable{Microsoft.Xna.Framework.Vector2},milk.Core.Anchor,milk.UI.UIElement,System.Nullable{Microsoft.Xna.Framework.Color},System.Nullable{Microsoft.Xna.Framework.Color},System.Nullable{Microsoft.Xna.Framework.Color},System.Nullable{Microsoft.Xna.Framework.Color},System.Nullable{Microsoft.Xna.Framework.Color},System.Nullable{Microsoft.Xna.Framework.Color},System.Int32,System.Action{milk.UI.UIElement,milk.Core.Scene},System.Action{milk.UI.UIElement,System.Boolean},System.Single,System.Boolean,System.Boolean)">
+            <summary>
+            Creates a new button object.
+            </summary>
+            <param name="caption">The text to display (default = null - no caption).</param>
+            <param name="font">The text font (default = null - FontSmall).</param>
+            <param name="position">The (x, y) button position.</param>
+            <param name="size">The (w, h) size of the button.</param>
+            <param name="anchor">The part of the button to link to the position.</param>
+            <param name="parent">The UIElement parent, for relative positioning.</param>
+            <param name="foregroundColor">The foreground color.</param>
+            <param name="backgroundColor">The background color.</param>
+            <param name="borderColor">The border color.</param>
+            <param name="selectedForegroundColor">The foreground color when the element is selected (default = null - no change).</param>
+            <param name="selectedBackgroundColor">The background color when the element is selected (default = null - no change).</param>
+            <param name="selectedBorderColor">The border color when the element is selected (default = null - no change).</param>
+            <param name="borderWidth">The width of the border (default = 1).</param>
+            <param name="onSelected">The button callback when selected.</param>
+            <param name="customDrawMethod">Optionally specified a custom draw method (default = null).</param>
+            <param name="alpha">Button's opacity (between 0 and 1, default = 1 - no opacity).</param>
+            <param name="visible">Button visibility (default = true).</param>
+            <param name="active">Button in use (default = true).</param>
+        </member>
+        <member name="T:milk.UI.Tween">
+            <summary>
+            A tween is added to a scene's animator, and links an action to a duration.
+            </summary>
+        </member>
+        <member name="F:milk.UI.Tween.Duration">
+            <summary>
+            The animation duration, in seconds.
+            </summary>
+        </member>
+        <member name="F:milk.UI.Tween.Action">
+            <summary>
+            An animation action.
+            </summary>
+        </member>
+        <member name="F:milk.UI.Tween.EasingFunction">
+            <summary>
+            An easing function for the animation.
+            </summary>
+        </member>
+        <member name="F:milk.UI.Tween.Finished">
+            <summary>
+            Is set to true once the animation has finished.
+            </summary>
+        </member>
+        <member name="M:milk.UI.Tween.#ctor(System.Action{System.Single},System.Single,milk.Core.EasingFunctions.EasingDelegate)">
+            <summary>
+            Creates a new tween object.
+            </summary>
+            <param name="action">The animation action.</param>
+            <param name="duration">The length of the animation, in seconds.</param>
+            <param name="easingFunction">The animation easing (default = null - linear).</param>
+        </member>
+        <member name="T:milk.UI.UIElement">
+            <summary>
+            A UI element is the base class for all UI items.
+            This class shouldn't be used directly.
+            </summary>
+        </member>
+        <member name="T:milk.UI.UIMenu">
+            <summary>
+            A menu holds UI elements.
+            </summary>
+        </member>
+        <member name="T:mill.Core.Animator">
+            <summary>
+            Each scene has an animator, which is responsible for processing tweens.
+            </summary>
+        </member>
+        <member name="M:mill.Core.Animator.AddTween(milk.UI.Tween)">
+            <summary>
+            Adds a tween to the animator.
+            </summary>
+            <param name="tween"></param>
         </member>
     </members>
 </doc>

@@ -4,14 +4,14 @@
     "/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/MonoGameECSTest.csproj": {}
   },
   "projects": {
-    "/home/rik/Documents/MonoGameEngineSolution/MonoGameECS/MonoGameECS.csproj": {
+    "/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/MonoGameECSTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/rik/Documents/MonoGameEngineSolution/MonoGameECS/MonoGameECS.csproj",
-        "projectName": "MonoGameECS",
-        "projectPath": "/home/rik/Documents/MonoGameEngineSolution/MonoGameECS/MonoGameECS.csproj",
+        "projectUniqueName": "/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/MonoGameECSTest.csproj",
+        "projectName": "MonoGameECSTest",
+        "projectPath": "/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/MonoGameECSTest.csproj",
         "packagesPath": "/home/rik/.nuget/packages/",
-        "outputPath": "/home/rik/Documents/MonoGameEngineSolution/MonoGameECS/obj/",
+        "outputPath": "/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/rik/.nuget/NuGet/NuGet.Config"
@@ -20,12 +20,17 @@
           "net8.0"
         ],
         "sources": {
+          "/home/rik/nuget-local": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/home/rik/Documents/MonoGameEngineSolution/milk/milk.csproj": {
+                "projectPath": "/home/rik/Documents/MonoGameEngineSolution/milk/milk.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -38,6 +43,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "MonoGame.Content.Builder.Task": {
+              "target": "Package",
+              "version": "[3.8.2.1105, )"
+            },
             "MonoGame.Extended": {
               "target": "Package",
               "version": "[4.0.3, )"
@@ -71,14 +80,14 @@
         }
       }
     },
-    "/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/MonoGameECSTest.csproj": {
-      "version": "1.0.0",
+    "/home/rik/Documents/MonoGameEngineSolution/milk/milk.csproj": {
+      "version": "0.1.3",
       "restore": {
-        "projectUniqueName": "/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/MonoGameECSTest.csproj",
-        "projectName": "MonoGameECSTest",
-        "projectPath": "/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/MonoGameECSTest.csproj",
+        "projectUniqueName": "/home/rik/Documents/MonoGameEngineSolution/milk/milk.csproj",
+        "projectName": "monogame-milk",
+        "projectPath": "/home/rik/Documents/MonoGameEngineSolution/milk/milk.csproj",
         "packagesPath": "/home/rik/.nuget/packages/",
-        "outputPath": "/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/obj/",
+        "outputPath": "/home/rik/Documents/MonoGameEngineSolution/milk/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/rik/.nuget/NuGet/NuGet.Config"
@@ -87,16 +96,13 @@
           "net8.0"
         ],
         "sources": {
+          "/home/rik/nuget-local": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {
-              "/home/rik/Documents/MonoGameEngineSolution/MonoGameECS/MonoGameECS.csproj": {
-                "projectPath": "/home/rik/Documents/MonoGameEngineSolution/MonoGameECS/MonoGameECS.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -109,10 +115,6 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "MonoGame.Content.Builder.Task": {
-              "target": "Package",
-              "version": "[3.8.2.1105, )"
-            },
             "MonoGame.Extended": {
               "target": "Package",
               "version": "[4.0.3, )"
