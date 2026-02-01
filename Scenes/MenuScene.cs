@@ -41,7 +41,7 @@ public class MenuScene : Scene
         );
 
         txtVersion = new Text(
-            caption: "Tiny Town v0.1",
+            caption: "Tiny Town v0.1.4",
             anchor: Anchor.BottomLeft,
             position: new Vector2(20, Size.Y - 5),
             outlineWidth: 3,
@@ -57,7 +57,6 @@ public class MenuScene : Scene
             color: GameSettings.primaryTextColor,
             outlineColor: Color.Black
         );
-
 
         imgMilk = new Image(
             texture: game._engineResources.ImgMilk,
@@ -77,7 +76,7 @@ public class MenuScene : Scene
             onSelected: (UIElement element, Scene scene) =>
             {
                 GameAssets.villageScene.GetCameraByName("main camera").SetZoom(4.5f, 2.0f);
-                game.RemoveScene(transition: new TransitionFadeIn(
+                Scenes.RemoveScene(transition: new TransitionFadeIn(
                     duration: GameSettings.sceneTransitionDuration)
                 );
             }
@@ -94,7 +93,7 @@ public class MenuScene : Scene
             customDrawMethod: GameUI.DrawButton,
             onSelected: (UIElement element, Scene scene) =>
             {
-                game.SetScene(
+                Scenes.SetScene(
                     GameAssets.infoScene,
                     transition: new TransitionFadeToBlack(
                         duration: GameSettings.sceneTransitionDuration
@@ -113,7 +112,7 @@ public class MenuScene : Scene
             foregroundColor: GameSettings.primaryTextColor,
             parent: btnCredits,
             customDrawMethod: GameUI.DrawButton,
-            onSelected: (UIElement element, Scene scene) => { EngineGlobals.game.Exit(); }
+            onSelected: (UIElement element, Scene scene) => { Quit(); }
         );
 
         // Link the buttons in the menu
@@ -131,8 +130,8 @@ public class MenuScene : Scene
     {
 
         // Pressing [Esc] also quits the game
-        if (game.inputManager.IsKeyPressed(Keys.Escape))
-            game.Quit();
+        if (Controls.IsKeyPressed(Keys.Escape))
+            Quit();
     
     }
 

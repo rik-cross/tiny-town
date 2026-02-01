@@ -5,16 +5,11 @@
 //   -- Docs: rik-cross.github.io/monogame-milk
 
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended.Tiled;
 using milk.Core;
 using milk.Transitions;
-using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
 
-using MonoGame.Extended;
-using MonoGame.Extended.Tiled;
-using MonoGame.Extended.Tiled.Renderers;
 
 public class HouseScene : Scene
 {
@@ -23,13 +18,8 @@ public class HouseScene : Scene
     {
 
         BackgroundColor = Color.CornflowerBlue;
-        Map = content.Load<TiledMap>("images/Maps/House");
+        Map = Milk.Content.Load<TiledMap>("images/Maps/House");
         EntitySortMethod = EntitySortMethods.SortBottom;
-
-        // Add player
-        //milk.Entity player = PlayerEntity.Create();
-        // TODO: move the player between scenes
-        //AddEntity(GameAssets.playerEntity);
 
         //
         // Add cameras
@@ -55,7 +45,7 @@ public class HouseScene : Scene
                     GameUtils.ChangePlayerScene(
                         fromScene: this,
                         toScene: GameAssets.villageScene,
-                        playerPosition: new Vector2(16 * 9 + 1, 16 * 11),
+                        playerPosition: new Vector2(16 * 9 + 3, 16 * 11),
                         playerState: "idle_down"
                     );
                 }
@@ -67,32 +57,12 @@ public class HouseScene : Scene
     public override void Input(GameTime gameTime)
     {
 
-        //
-        // Main camera controls
-        //
-
-        // Number keys to set the main camera zoom level
-        if (game.inputManager.IsKeyPressed(Keys.D1))
-            GetCameraByName("main camera").SetZoom(1.0f, duration: 0.5f);
-        if (game.inputManager.IsKeyPressed(Keys.D2))
-            GetCameraByName("main camera").SetZoom(2.0f, duration: 0.5f);
-        if (game.inputManager.IsKeyPressed(Keys.D3))
-            GetCameraByName("main camera").SetZoom(3.0f, duration: 0.5f);
-        if (game.inputManager.IsKeyPressed(Keys.D4))
-            GetCameraByName("main camera").SetZoom(4.0f, duration: 0.5f);
-        if (game.inputManager.IsKeyPressed(Keys.D5))
-            GetCameraByName("main camera").SetZoom(5.0f, duration: 0.5f);
-
-        //
-        // Scene controls
-        //
-
         // Press [Esc] to 'pause'
-        if (game.inputManager.IsKeyPressed(Keys.Escape))
+        if (Controls.IsKeyPressed(Keys.Escape))
         {
-            game.SetScene(
+            Scenes.SetScene(
                 new PauseScene(),
-                new TransitionFadeIn(duration: 100),
+                new TransitionFadeIn(duration: GameSettings.scenePauseDuration),
                 keepExistingScenes: true
             );
         }

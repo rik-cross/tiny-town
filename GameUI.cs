@@ -91,7 +91,7 @@ public static class GameUI
             position.Y + (element.Size.Y / 2) - (stringSize.Y / 2)
         );
 
-        EngineGlobals.game.spriteBatch.DrawString(
+        Milk.Graphics.DrawString(
             element.Font,
             element.Caption,
             textPos,
@@ -105,9 +105,9 @@ public static class GameUI
     public static void DrawButtonIndicators(UIElement element, Vector2 position, int borderScale = 1)
     {
 
-        int currentActiveBorder = (int)(Math.Sin(element.parentScene.elapsedTime / 150) * 2 * borderScale);
+        int currentActiveBorder = (int)(Math.Sin(element.parentScene.elapsedTime * 6) * 2 * borderScale);
 
-        EngineGlobals.game.spriteBatch.Draw(
+        Milk.Graphics.Draw(
             indicatorTopLeft,
             new Rectangle(
                 (int)position.X - currentActiveBorder - 4 * borderScale,
@@ -118,7 +118,7 @@ public static class GameUI
             Color.White
         );
 
-        EngineGlobals.game.spriteBatch.Draw(
+        Milk.Graphics.Draw(
             indicatorTopRight,
             new Rectangle(
                 (int)(position.X + element.Size.X + currentActiveBorder - 4 * borderScale),
@@ -129,7 +129,7 @@ public static class GameUI
             Color.White
         );
 
-        EngineGlobals.game.spriteBatch.Draw(
+        Milk.Graphics.Draw(
             indicatorBottomLeft,
             new Rectangle(
                 (int)position.X - currentActiveBorder - 4 * borderScale,
@@ -140,7 +140,7 @@ public static class GameUI
             Color.White
         );
 
-        EngineGlobals.game.spriteBatch.Draw(
+        Milk.Graphics.Draw(
             indicatorBottomRight,
             new Rectangle(
                 (int)(position.X + element.Size.X + currentActiveBorder - 4 * borderScale),
@@ -156,12 +156,13 @@ public static class GameUI
     public static void DrawButtonDown(Vector2 position, Vector2 size, int borderScale = 1, float alpha = 1.0f)
     {
 
-        EngineGlobals.game.spriteBatch.Draw(
+        Milk.Graphics.Draw(
             buttonTopLeft,
             new Rectangle((int)position.X, (int)position.Y, 5 * borderScale, 5 * borderScale),
             Color.White * alpha
         );        
-        EngineGlobals.game.spriteBatch.Draw(
+        
+        Milk.Graphics.Draw(
             buttonTopMiddle,
             new Rectangle(
                 (int)position.X + (5 * borderScale),
@@ -171,7 +172,8 @@ public static class GameUI
             ),
             Color.White * alpha
         );
-        EngineGlobals.game.spriteBatch.Draw(
+
+        Milk.Graphics.Draw(
             buttonTopRight,
             new Rectangle(
                 (int)(position.X + (size.X - (5 * borderScale))),
@@ -181,7 +183,8 @@ public static class GameUI
             ),
             Color.White * alpha
         );
-        EngineGlobals.game.spriteBatch.Draw(
+
+        Milk.Graphics.Draw(
             buttonMiddleLeft,
             new Rectangle(
                 (int)position.X,
@@ -191,7 +194,8 @@ public static class GameUI
             ),
             Color.White * alpha
         );
-        EngineGlobals.game.spriteBatch.Draw(
+
+        Milk.Graphics.Draw(
             buttonMiddleRight,
             new Rectangle(
                 (int)(position.X + (size.X - (5 * borderScale))),
@@ -201,7 +205,8 @@ public static class GameUI
             ),
             Color.White * alpha
         );
-        EngineGlobals.game.spriteBatch.Draw(
+
+        Milk.Graphics.Draw(
             buttonBottomLeft,
             new Rectangle(
                 (int)position.X,
@@ -211,7 +216,8 @@ public static class GameUI
             ),
             Color.White * alpha
         );
-        EngineGlobals.game.spriteBatch.Draw(
+
+        Milk.Graphics.Draw(
             buttonBottomRight,
             new Rectangle(
                 (int)(position.X + (size.X - (5 * borderScale))),
@@ -221,7 +227,8 @@ public static class GameUI
             ),
             Color.White * alpha
         );
-        EngineGlobals.game.spriteBatch.Draw(
+
+        Milk.Graphics.Draw(
             buttonBottomMiddle,
             new Rectangle(
                 (int)(position.X + (5 * borderScale)),
@@ -231,7 +238,8 @@ public static class GameUI
             ),
             Color.White * alpha
         );
-        EngineGlobals.game.spriteBatch.Draw(
+
+        Milk.Graphics.Draw(
             buttonCenter,
             new Rectangle(
                 (int)(position.X + (5 * borderScale)),

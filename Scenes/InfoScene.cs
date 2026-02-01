@@ -71,7 +71,7 @@ public class InfoScene : Scene
             customDrawMethod: GameUI.DrawButton,
             onSelected: (UIElement element, Scene scene) =>
             {
-                game.RemoveScene(
+                Scenes.RemoveScene(
                     transition: new TransitionFadeToBlack(
                         duration: GameSettings.sceneTransitionDuration
                     )

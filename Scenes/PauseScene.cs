@@ -51,7 +51,7 @@ public class PauseScene : Scene
             customDrawMethod: GameUI.DrawButton,
             onSelected: (UIElement element, Scene scene) =>
             {
-                EngineGlobals.game.RemoveScene(
+                Scenes.RemoveScene(
                     transition: new TransitionFadeIn(
                         duration: GameSettings.scenePauseDuration
                     )
@@ -71,7 +71,7 @@ public class PauseScene : Scene
             foregroundColor: GameSettings.primaryTextColor,
             onSelected: (UIElement element, Scene scene) =>
             {
-                EngineGlobals.game.SetScene(
+                Milk.Scenes.SetScene(
                     [
                         GameAssets.menuScene,
                         GetSceneBelow()
@@ -94,8 +94,10 @@ public class PauseScene : Scene
     {
 
         // The [Esc] key also returns to the game
-        if (game.inputManager.IsKeyPressed(Keys.Escape))
-            game.RemoveScene(transition: new TransitionFadeIn(duration: 100));
+        if (Controls.IsKeyPressed(Keys.Escape))
+            Scenes.RemoveScene(transition: new TransitionFadeIn(
+                duration: GameSettings.scenePauseDuration
+            ));
     
     }
 

@@ -16,7 +16,7 @@ using var game = new milk.Core.Game(
 
 // Add scenes to the game via an Init() method
 game.Init = () => {
-    game.SetScene([GameAssets.menuScene, GameAssets.villageScene]);
+    Milk.Scenes.SetScene([GameAssets.menuScene, GameAssets.villageScene]);
 };
 
 // Run the game

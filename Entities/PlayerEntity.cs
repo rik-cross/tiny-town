@@ -14,7 +14,7 @@ using milk.Components;
 public static class PlayerEntity
 {
 
-    public static void PlayerInputController(Scene scene, Entity entity)
+    public static void PlayerInputController(Scene scene, Entity entity, bool isSuspended)
     {
 
         //
@@ -28,14 +28,18 @@ public static class PlayerEntity
 
         float speed = 50.0f;
 
-        if (scene.game.inputManager.IsKeyDown(Keys.W))
-            dy -= speed;
-        if (scene.game.inputManager.IsKeyDown(Keys.A))
-            dx -= speed;
-        if (scene.game.inputManager.IsKeyDown(Keys.S))
-            dy += speed;
-        if (scene.game.inputManager.IsKeyDown(Keys.D))
-            dx += speed;
+        if (isSuspended == false) {
+
+            if (scene.game.inputManager.IsKeyDown(Keys.W))
+                dy -= speed;
+            if (scene.game.inputManager.IsKeyDown(Keys.A))
+                dx -= speed;
+            if (scene.game.inputManager.IsKeyDown(Keys.S))
+                dy += speed;
+            if (scene.game.inputManager.IsKeyDown(Keys.D))
+                dx += speed;
+
+        }
 
         physicsComponent.Velocity = new Vector2(dx, dy);
 
@@ -65,9 +69,8 @@ public static class PlayerEntity
 
     }
 
-    public static Texture2D playerSpriteSheet = EngineGlobals.game.Content.Load<Texture2D>("images/player");
+    public static Texture2D playerSpriteSheet = Milk.Content.Load<Texture2D>("images/player");
     public static List<List<Texture2D>> playerImagesList = Utilities.SplitTexture(playerSpriteSheet, new Vector2(48, 48));
-
 
     public static Entity Create()
     {
@@ -96,156 +99,134 @@ public static class PlayerEntity
 
         playerEntity.AddComponent(new SpriteComponent());
 
-        playerEntity.GetComponent<SpriteComponent>().AddSprite(
-            sprite: new Sprite(
-                textureList: new List<Texture2D>() {
-                    playerImagesList[1][0],
-                    playerImagesList[1][1],
-                    playerImagesList[1][2],
-                    playerImagesList[1][3],
-                    playerImagesList[1][4],
-                    playerImagesList[1][5],
-                    playerImagesList[1][6],
-                    playerImagesList[1][7]
-                },
-                resizeToEntity: false,
-                duration: 0.6f,
-                offset: new Vector2(-17, -16)
-            ),
-            state: "idle_up"
+        playerEntity.GetComponent<SpriteComponent>().AddTextures(
+            textureList: new List<Texture2D>() {
+                playerImagesList[1][0],
+                playerImagesList[1][1],
+                playerImagesList[1][2],
+                playerImagesList[1][3],
+                playerImagesList[1][4],
+                playerImagesList[1][5],
+                playerImagesList[1][6],
+                playerImagesList[1][7]
+            },
+            state: "idle_up",
+            duration: 0.6f,
+            offset: new Vector2(17, 16)
         );
 
-        playerEntity.GetComponent<SpriteComponent>().AddSprite(
-            sprite: new Sprite(
-                textureList: new List<Texture2D>() {
-                    playerImagesList[0][0],
-                    playerImagesList[0][1],
-                    playerImagesList[0][2],
-                    playerImagesList[0][3],
-                    playerImagesList[0][4],
-                    playerImagesList[0][5],
-                    playerImagesList[0][6],
-                    playerImagesList[0][7]
-                },
-                resizeToEntity: false,
-                duration: 0.6f,
-                offset: new Vector2(-17, -16)
-            ),
-            state: "idle_down"
+        playerEntity.GetComponent<SpriteComponent>().AddTextures(
+            textureList: new List<Texture2D>() {
+                playerImagesList[0][0],
+                playerImagesList[0][1],
+                playerImagesList[0][2],
+                playerImagesList[0][3],
+                playerImagesList[0][4],
+                playerImagesList[0][5],
+                playerImagesList[0][6],
+                playerImagesList[0][7]
+            },
+            state: "idle_down",
+            duration: 0.6f,
+            offset: new Vector2(17, 16)
         );
 
-        playerEntity.GetComponent<SpriteComponent>().AddSprite(
-            sprite: new Sprite(
-                textureList: new List<Texture2D>() {
-                    playerImagesList[3][0],
-                    playerImagesList[3][1],
-                    playerImagesList[3][2],
-                    playerImagesList[3][3],
-                    playerImagesList[3][4],
-                    playerImagesList[3][5],
-                    playerImagesList[3][6],
-                    playerImagesList[3][7]
-                },
-                resizeToEntity: false,
-                duration: 0.6f,
-                offset: new Vector2(-17, -16)
-            ),
-            state: "idle_left"
+        playerEntity.GetComponent<SpriteComponent>().AddTextures(
+            textureList: new List<Texture2D>() {
+                playerImagesList[3][0],
+                playerImagesList[3][1],
+                playerImagesList[3][2],
+                playerImagesList[3][3],
+                playerImagesList[3][4],
+                playerImagesList[3][5],
+                playerImagesList[3][6],
+                playerImagesList[3][7]
+            },
+            state: "idle_left",
+            duration: 0.6f,
+            offset: new Vector2(17, 16)
         );
 
-        playerEntity.GetComponent<SpriteComponent>().AddSprite(
-            sprite: new Sprite(
-                textureList: new List<Texture2D>() {
-                    playerImagesList[2][0],
-                    playerImagesList[2][1],
-                    playerImagesList[2][2],
-                    playerImagesList[2][3],
-                    playerImagesList[2][4],
-                    playerImagesList[2][5],
-                    playerImagesList[2][6],
-                    playerImagesList[2][7]
-                },
-                resizeToEntity: false,
-                duration: 0.6f,
-                offset: new Vector2(-17, -16)
-            ),
-            state: "idle_right"
+        playerEntity.GetComponent<SpriteComponent>().AddTextures(
+            textureList: new List<Texture2D>() {
+                playerImagesList[2][0],
+                playerImagesList[2][1],
+                playerImagesList[2][2],
+                playerImagesList[2][3],
+                playerImagesList[2][4],
+                playerImagesList[2][5],
+                playerImagesList[2][6],
+                playerImagesList[2][7]
+            },
+            state: "idle_right",
+            duration: 0.6f,
+            offset: new Vector2(17, 16)
         );
 
-        playerEntity.GetComponent<SpriteComponent>().AddSprite(
-            sprite: new Sprite(
-                textureList: new List<Texture2D>() {
-                    playerImagesList[5][0],
-                    playerImagesList[5][1],
-                    playerImagesList[5][2],
-                    playerImagesList[5][3],
-                    playerImagesList[5][4],
-                    playerImagesList[5][5],
-                    playerImagesList[5][6],
-                    playerImagesList[5][7]
-                },
-                resizeToEntity: false,
-                duration: 0.6f,
-                offset: new Vector2(-17, -16)
-            ),
-            state: "walk_up"
+        playerEntity.GetComponent<SpriteComponent>().AddTextures(
+            textureList: new List<Texture2D>() {
+                playerImagesList[5][0],
+                playerImagesList[5][1],
+                playerImagesList[5][2],
+                playerImagesList[5][3],
+                playerImagesList[5][4],
+                playerImagesList[5][5],
+                playerImagesList[5][6],
+                playerImagesList[5][7]
+            },
+            state: "walk_up",
+            duration: 0.6f,
+            offset: new Vector2(17, 16)
         );
 
-        playerEntity.GetComponent<SpriteComponent>().AddSprite(
-            sprite: new Sprite(
-                textureList: new List<Texture2D>() {
-                    playerImagesList[4][0],
-                    playerImagesList[4][1],
-                    playerImagesList[4][2],
-                    playerImagesList[4][3],
-                    playerImagesList[4][4],
-                    playerImagesList[4][5],
-                    playerImagesList[4][6],
-                    playerImagesList[4][7]
-                },
-                resizeToEntity: false,
-                duration: 0.6f,
-                offset: new Vector2(-17, -16)
-            ),
-            state: "walk_down"
+        playerEntity.GetComponent<SpriteComponent>().AddTextures(
+            textureList: new List<Texture2D>() {
+                playerImagesList[4][0],
+                playerImagesList[4][1],
+                playerImagesList[4][2],
+                playerImagesList[4][3],
+                playerImagesList[4][4],
+                playerImagesList[4][5],
+                playerImagesList[4][6],
+                playerImagesList[4][7]
+            },
+            state: "walk_down",
+            duration: 0.6f,
+            offset: new Vector2(17, 16)
         );
 
-        playerEntity.GetComponent<SpriteComponent>().AddSprite(
-            sprite: new Sprite(
-                textureList: new List<Texture2D>() {
-                    playerImagesList[7][0],
-                    playerImagesList[7][1],
-                    playerImagesList[7][2],
-                    playerImagesList[7][3],
-                    playerImagesList[7][4],
-                    playerImagesList[7][5],
-                    playerImagesList[7][6],
-                    playerImagesList[7][7]
-                },
-                resizeToEntity: false,
-                duration: 0.6f,
-                offset: new Vector2(-17, -16)
-            ),
-            state: "walk_left"
+
+        playerEntity.GetComponent<SpriteComponent>().AddTextures(
+            textureList: new List<Texture2D>() {
+                playerImagesList[7][0],
+                playerImagesList[7][1],
+                playerImagesList[7][2],
+                playerImagesList[7][3],
+                playerImagesList[7][4],
+                playerImagesList[7][5],
+                playerImagesList[7][6],
+                playerImagesList[7][7]
+            },
+            state: "walk_left",
+            duration: 0.6f,
+            offset: new Vector2(17, 16)
         );
 
-        playerEntity.GetComponent<SpriteComponent>().AddSprite(
-            sprite: new Sprite(
-                textureList: new List<Texture2D>() {
-                    playerImagesList[6][0],
-                    playerImagesList[6][1],
-                    playerImagesList[6][2],
-                    playerImagesList[6][3],
-                    playerImagesList[6][4],
-                    playerImagesList[6][5],
-                    playerImagesList[6][6],
-                    playerImagesList[6][7]
-                },
-                resizeToEntity: false,
-                duration: 0.6f,
-                offset: new Vector2(-17, -16)
-            ),
-            state: "walk_right"
+
+        playerEntity.GetComponent<SpriteComponent>().AddTextures(
+            textureList: new List<Texture2D>() {
+                playerImagesList[6][0],
+                playerImagesList[6][1],
+                playerImagesList[6][2],
+                playerImagesList[6][3],
+                playerImagesList[6][4],
+                playerImagesList[6][5],
+                playerImagesList[6][6],
+                playerImagesList[6][7]
+            },
+            state: "walk_right",
+            duration: 0.6f,
+            offset: new Vector2(17, 16)
         );
 
         playerEntity.AddComponent(new PhysicsComponent());

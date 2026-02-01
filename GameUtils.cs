@@ -49,9 +49,9 @@ public static class GameUtils
         playerEntity.State = playerState;
 
         // Initiate the scene transition
-        fromScene.game.SetScene(
+        Milk.Scenes.SetScene(
             toScene,
-            new TransitionFadeToBlack(400)
+            new TransitionFadeToBlack(duration: GameSettings.sceneTransitionDuration)
         );
 
     }

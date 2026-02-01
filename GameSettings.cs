@@ -14,8 +14,8 @@ public static class GameSettings
     public static Color primaryTextColor = new Color(243, 244, 231);
     public static Color darkBrown = new Color(170, 121, 89);
 
-    public static int sceneTransitionDuration = 500;
-    public static int scenePauseDuration = 100;
+    public static float sceneTransitionDuration = 0.5f;
+    public static float scenePauseDuration = 0.1f;
     public static int buttonSpacing = 10;
 
 }

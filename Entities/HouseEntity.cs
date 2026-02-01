@@ -9,11 +9,12 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using milk.Core;
 using milk.Components;
+using System;
 
 public static class HouseEntity
 {
 
-    public static Texture2D houseSpriteTexture = EngineGlobals.game.Content.Load<Texture2D>("images/house");
+    public static Texture2D houseSpriteTexture = Milk.Content.Load<Texture2D>("images/house");
    
     public static Entity Create(Vector2 position)
     {
@@ -34,26 +35,17 @@ public static class HouseEntity
             )
         );
 
-        houseEntity.AddComponent(new SpriteComponent());
-
-        houseEntity.GetComponent<SpriteComponent>().AddSprite(
-            sprite: new Sprite(
-                textureList: new List<Texture2D>() {
-                    houseSpriteTexture
-                },
-                resizeToEntity: false,
-                offset: new Vector2(-11, -9)
-            ),
-            state: "default"
-        );
+        houseEntity.AddComponent(new SpriteComponent(
+            houseSpriteTexture
+        ));
 
         houseEntity.AddComponent(
             new TriggerComponent(
                 size: new Vector2(10, 5),
-                offset: new Vector2(40, 71 - 10),
-                onCollisionEnter: (Entity entity1, Entity entity2, float distance) =>
+                offset: new Vector2(41, 65),
+                onCollide: (Entity entity1, Entity entity2, float distance) =>
                 {
-                    if (entity2.Name != "player")
+                    if (entity2.Name != "player" || distance > 5)
                         return;
 
                     GameUtils.ChangePlayerScene(
