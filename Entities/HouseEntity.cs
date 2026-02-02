@@ -19,7 +19,7 @@ public static class HouseEntity
     public static Entity Create(Vector2 position)
     {
         
-        Entity houseEntity = new Entity();
+        Entity houseEntity = new Entity(tags: new List<string>() {"building"});
 
         houseEntity.AddComponent(
             new TransformComponent(

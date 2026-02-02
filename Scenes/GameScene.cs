@@ -4,13 +4,14 @@
 //   Uses the milk MonoGame ECS engine
 //   -- Docs: rik-cross.github.io/monogame-milk
 
+using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Tiled;
 using milk.Core;
 using milk.Components;
 using milk.Transitions;
-using System;
 
 public class GameScene : Scene
 {
@@ -47,6 +48,11 @@ public class GameScene : Scene
             )
         );
         
+    }
+
+    public override void Update(GameTime gameTime)
+    {
+        GameUtils.SetOverlappingEntityAlpha(this);
     }
 
     public override void Input(GameTime gameTime)

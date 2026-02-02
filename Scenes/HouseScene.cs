@@ -4,6 +4,7 @@
 //   Uses the milk MonoGame ECS engine
 //   -- Docs: rik-cross.github.io/monogame-milk
 
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Tiled;
@@ -45,7 +46,7 @@ public class HouseScene : Scene
                     GameUtils.ChangePlayerScene(
                         fromScene: this,
                         toScene: GameAssets.villageScene,
-                        playerPosition: new Vector2(16 * 9 + 3, 16 * 11),
+                        playerPosition: new Vector2(16 * 9 + 2, 16 * 11),
                         playerState: "idle_down"
                     );
                 }

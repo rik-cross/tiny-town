@@ -19,7 +19,7 @@ public static class TreeEntity
 
     public static Entity Create(Vector2 position)
     {
-        Entity treeEntity = new Entity();
+        Entity treeEntity = new Entity(tags: new List<string>() {"tree"});
 
         treeEntity.AddComponent(
             new TransformComponent(
@@ -39,17 +39,6 @@ public static class TreeEntity
             treeImagesList[0][0],
             offset: new Vector2(12, 13)
         ));
-
-        /*treeEntity.GetComponent<SpriteComponent>().AddSprite(
-            sprite: new Sprite(
-                textureList: new List<Texture2D>() {
-                    treeImagesList[0][0]
-                },
-                resizeToEntity: false,
-                offset: new Vector2(-12, -13)
-            ),
-            state: "default"
-        );*/
 
         treeEntity.State = "default";
 

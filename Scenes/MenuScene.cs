@@ -41,7 +41,7 @@ public class MenuScene : Scene
         );
 
         txtVersion = new Text(
-            caption: "Tiny Town v0.1.4",
+            caption: "Tiny Town v0.1.5",
             anchor: Anchor.BottomLeft,
             position: new Vector2(20, Size.Y - 5),
             outlineWidth: 3,

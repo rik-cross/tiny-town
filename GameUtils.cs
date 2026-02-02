@@ -5,6 +5,7 @@
 //   -- Docs: rik-cross.github.io/monogame-milk
 
 using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using milk.Core;
 using milk.Components;
@@ -41,7 +42,6 @@ public static class GameUtils
         playerEntity.GetComponent<PhysicsComponent>().Velocity = Vector2.Zero;
         playerEntity.GetComponent<PhysicsComponent>().Acceleration = Vector2.Zero;
 
-        // TODO: set zoom to a global value?
         // Track the new player
         toScene.GetCameraByName("main camera").TrackedEntity = playerEntity;
 
@@ -55,4 +55,57 @@ public static class GameUtils
         );
 
     }
+
+    public static void SetOverlappingEntityAlpha(Scene scene)
+    {
+        
+        // Get player entity information
+        
+        Entity? player = scene.GetEntityByName("player");
+        if (player == null)
+            return;
+        
+        TransformComponent playerTransform = player.GetComponent<TransformComponent>();
+        ColliderComponent playerCollider = player.GetComponent<ColliderComponent>();
+
+        Rectangle playerRect = new Rectangle(
+            (int)(playerTransform.X + playerCollider.Offset.X),
+            (int)(playerTransform.Y + playerCollider.Offset.Y),
+            (int)playerCollider.Size.X,
+            (int)playerCollider.Size.Y
+        );
+
+        // Loop through all entities
+        foreach (Entity entity in scene.GetAllEntities()) {
+
+            if (
+                entity != player &&
+                (entity.HasTag("building") || entity.HasTag("tree")) &&
+                entity.HasComponent<TransformComponent>() &&
+                entity.HasComponent<SpriteComponent>()
+            )
+            {
+
+                TransformComponent transform = entity.GetComponent<TransformComponent>();
+                SpriteComponent sprite = entity.GetComponent<SpriteComponent>();
+
+                Rectangle entityRect = new Rectangle(
+                    (int)transform.X,
+                    (int)transform.Y,
+                    (int)transform.Width - 1,
+                    (int)transform.Height
+                );
+
+                if (sprite.GetSpriteForState(entity.State) != null)
+                {
+                    if (playerRect.Intersects(entityRect))
+                        sprite.GetSpriteForState(entity.State).Alpha = 0.5f;
+                    else 
+                        sprite.GetSpriteForState(entity.State).Alpha = 1.0f;
+                }
+
+            }
+        }
+    }
+
 }
