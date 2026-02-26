@@ -5,6 +5,8 @@
   <Config />
   <SourceFiles>
     <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/house.png</File>
+    <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/item-shadow.png</File>
+    <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/items.png</File>
     <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/Maps/House.tmx</File>
     <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/Maps/Village.tmx</File>
     <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/player.png</File>
@@ -13,6 +15,8 @@
     <File>/home/rik/Documents/MonoGameEngineSolution/MonoGameECSTest/Content/images/UI/indicators.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

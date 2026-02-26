@@ -4,8 +4,6 @@
 //   Uses the milk MonoGame ECS engine
 //   -- Docs: rik-cross.github.io/monogame-milk
 
-using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Tiled;
@@ -32,6 +30,11 @@ public class GameScene : Scene
         AddEntity(TreeEntity.Create(new Vector2(210, 140)));
         AddEntity(TreeEntity.Create(new Vector2(230, 120)));
 
+        // Add apples
+        AddEntity(AppleEntity.Create(new Vector2(250, 180)));
+        AddEntity(AppleEntity.Create(new Vector2(260, 195)));
+        AddEntity(AppleEntity.Create(new Vector2(255, 160)));
+
         //
         // Add camera
         //
@@ -56,11 +59,12 @@ public class GameScene : Scene
     }
 
     public override void Input(GameTime gameTime)
-    {
+    {     
 
         // Press [Esc] to 'pause'
         if (game.inputManager.IsKeyPressed(Keys.Escape))
         {
+
             Scenes.SetScene(
                 new PauseScene(),
                 new TransitionFadeIn(duration: GameSettings.scenePauseDuration),
@@ -68,6 +72,11 @@ public class GameScene : Scene
             );
         }
 
+    }
+
+    public override void OnEnter()
+    {
+        GameAssets.playerEntity.GetComponent<InventoryComponent>().Visible = true;
     }
 
 }

@@ -6,7 +6,6 @@
 
 using Microsoft.Xna.Framework;
 using milk.Core;
-using milk.Transitions;
 
 // Create a new game object
 using var game = new milk.Core.Game(

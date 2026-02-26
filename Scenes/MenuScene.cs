@@ -10,6 +10,7 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using milk.Components;
 using milk.Core;
 using milk.Transitions;
 using milk.UI;
@@ -41,7 +42,7 @@ public class MenuScene : Scene
         );
 
         txtVersion = new Text(
-            caption: "Tiny Town v0.1.5",
+            caption: "Tiny Town v0.1.7",
             anchor: Anchor.BottomLeft,
             position: new Vector2(20, Size.Y - 5),
             outlineWidth: 3,

@@ -13,13 +13,14 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using milk.Core;
+using milk.Components;
 using milk.UI;
 using milk.Transitions;
 
 public class PauseScene : Scene
 {
 
-    private Text pausedText;
+    public Text pausedText;
 
     public override void Init()
     {
@@ -71,6 +72,9 @@ public class PauseScene : Scene
             foregroundColor: GameSettings.primaryTextColor,
             onSelected: (UIElement element, Scene scene) =>
             {
+                // Hide the player inventory
+                GameAssets.playerEntity.GetComponent<InventoryComponent>().Visible = false;
+                // Change scenes
                 Milk.Scenes.SetScene(
                     [
                         GameAssets.menuScene,

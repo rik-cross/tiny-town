@@ -16,7 +16,9 @@ using Microsoft.Xna.Framework.Graphics;
 public static class GameUI
 {
     
+    //
     // Button elements
+    //
 
     public static Texture2D buttonTopLeft = Utilities.GetSubTexture(
         GameAssets.buttonSheet,
@@ -55,7 +57,51 @@ public static class GameUI
         59 + 5, 71 + 5, 1, 1
     );
 
+    //
+    // Box elements
+    //
+
+    public static Texture2D boxTopLeft = Utilities.GetSubTexture(
+        GameAssets.buttonSheet,
+        59 + 48, 71, 5, 5
+    );
+    public static Texture2D boxTopMiddle = Utilities.GetSubTexture(
+        GameAssets.buttonSheet,
+        59 + 48 + 5, 71, 1, 5
+    );
+    public static Texture2D boxTopRight = Utilities.GetSubTexture(
+        GameAssets.buttonSheet,
+        80 + 48, 71, 5, 5
+    );
+    public static Texture2D boxMiddleLeft = Utilities.GetSubTexture(
+        GameAssets.buttonSheet,
+        59 + 48, 71 + 5, 5, 1
+    );
+    public static Texture2D boxMiddleRight = Utilities.GetSubTexture(
+        GameAssets.buttonSheet,
+        80 + 48, 71 + 5, 5, 1
+    );
+    public static Texture2D boxBottomLeft = Utilities.GetSubTexture(
+        GameAssets.buttonSheet,
+        59 + 48, 84, 5, 5
+    );
+    public static Texture2D boxBottomRight = Utilities.GetSubTexture(
+        GameAssets.buttonSheet,
+        80 + 48, 84, 5, 5
+    );
+    public static Texture2D boxBottomMiddle = Utilities.GetSubTexture(
+        GameAssets.buttonSheet,
+        59 + 48 + 5, 84, 1, 5
+    );
+    public static Texture2D boxCenter = Utilities.GetSubTexture(
+        GameAssets.buttonSheet,
+        59 + 48 + 5, 71 + 5, 1, 1
+    );
+
+    //
     // Indicator elements
+    //
+
     public static Texture2D indicatorTopLeft = Utilities.GetSubTexture(
         GameAssets.indicators,
         0, 0, 8, 9
@@ -153,13 +199,15 @@ public static class GameUI
 
     }
 
-    public static void DrawButtonDown(Vector2 position, Vector2 size, int borderScale = 1, float alpha = 1.0f)
+    public static void DrawButtonDown(Vector2 position, Vector2 size, int borderScale = 1, float alpha = 1.0f, Color? color = null)
     {
+
+        Color c = color ?? Color.White;
 
         Milk.Graphics.Draw(
             buttonTopLeft,
             new Rectangle((int)position.X, (int)position.Y, 5 * borderScale, 5 * borderScale),
-            Color.White * alpha
+            c * alpha
         );        
         
         Milk.Graphics.Draw(
@@ -170,7 +218,7 @@ public static class GameUI
                 (int)(size.X - 2 * 5 * borderScale),
                 5 * borderScale
             ),
-            Color.White * alpha
+            c * alpha
         );
 
         Milk.Graphics.Draw(
@@ -181,7 +229,7 @@ public static class GameUI
                 5 * borderScale,
                 5 * borderScale
             ),
-            Color.White * alpha
+            c * alpha
         );
 
         Milk.Graphics.Draw(
@@ -192,7 +240,7 @@ public static class GameUI
                 5 * borderScale,
                 (int)(size.Y - 2 * 5 * borderScale)
             ),
-            Color.White * alpha
+            c * alpha
         );
 
         Milk.Graphics.Draw(
@@ -203,7 +251,7 @@ public static class GameUI
                 5 * borderScale,
                 (int)(size.Y - 2 * 5 * borderScale)
             ),
-            Color.White * alpha
+            c * alpha
         );
 
         Milk.Graphics.Draw(
@@ -214,7 +262,7 @@ public static class GameUI
                 5 * borderScale,
                 5 * borderScale
             ),
-            Color.White * alpha
+            c * alpha
         );
 
         Milk.Graphics.Draw(
@@ -225,7 +273,7 @@ public static class GameUI
                 5 * borderScale,
                 5 * borderScale
             ),
-            Color.White * alpha
+            c * alpha
         );
 
         Milk.Graphics.Draw(
@@ -236,7 +284,7 @@ public static class GameUI
                 (int)(size.X - 2 * 5 * borderScale),
                 5 * borderScale
             ),
-            Color.White * alpha
+            c * alpha
         );
 
         Milk.Graphics.Draw(
@@ -247,7 +295,108 @@ public static class GameUI
                 (int)(size.X - 2 * 5 * borderScale),
                 (int)(size.Y - 2 * 5 * borderScale)
             ),
-            Color.White * alpha
+            c * alpha
+        );
+
+    }
+
+    public static void DrawBox(Vector2 position, Vector2 size, int borderScale = 1, float alpha = 1.0f, Color? color = null)
+    {
+
+        Color c = color ?? Color.White;
+
+        Milk.Graphics.Draw(
+            boxTopLeft,
+            new Rectangle((int)position.X, (int)position.Y, 5 * borderScale, 5 * borderScale),
+            c * alpha
+        );        
+        
+        Milk.Graphics.Draw(
+            boxTopMiddle,
+            new Rectangle(
+                (int)position.X + (5 * borderScale),
+                (int)position.Y,
+                (int)(size.X - 2 * 5 * borderScale),
+                5 * borderScale
+            ),
+            c * alpha
+        );
+
+        Milk.Graphics.Draw(
+            boxTopRight,
+            new Rectangle(
+                (int)(position.X + (size.X - (5 * borderScale))),
+                (int)position.Y,
+                5 * borderScale,
+                5 * borderScale
+            ),
+            c * alpha
+        );
+
+        Milk.Graphics.Draw(
+            boxMiddleLeft,
+            new Rectangle(
+                (int)position.X,
+                (int)(position.Y + 5 * borderScale),
+                5 * borderScale,
+                (int)(size.Y - 2 * 5 * borderScale)
+            ),
+            c * alpha
+        );
+
+        Milk.Graphics.Draw(
+            boxMiddleRight,
+            new Rectangle(
+                (int)(position.X + (size.X - (5 * borderScale))),
+                (int)(position.Y + 5 * borderScale),
+                5 * borderScale,
+                (int)(size.Y - 2 * 5 * borderScale)
+            ),
+            c * alpha
+        );
+
+        Milk.Graphics.Draw(
+            boxBottomLeft,
+            new Rectangle(
+                (int)position.X,
+                (int)(position.Y + (size.Y - (5 * borderScale))),
+                5 * borderScale,
+                5 * borderScale
+            ),
+            c * alpha
+        );
+
+        Milk.Graphics.Draw(
+            boxBottomRight,
+            new Rectangle(
+                (int)(position.X + (size.X - (5 * borderScale))),
+                (int)(position.Y + (size.Y - (5 * borderScale))),
+                5 * borderScale,
+                5 * borderScale
+            ),
+            c * alpha
+        );
+
+        Milk.Graphics.Draw(
+            boxBottomMiddle,
+            new Rectangle(
+                (int)(position.X + (5 * borderScale)),
+                (int)(position.Y + (size.Y - (5 * borderScale))),
+                (int)(size.X - 2 * 5 * borderScale),
+                5 * borderScale
+            ),
+            c * alpha
+        );
+
+        Milk.Graphics.Draw(
+            boxCenter,
+            new Rectangle(
+                (int)(position.X + (5 * borderScale)),
+                (int)(position.Y + (5 * borderScale)),
+                (int)(size.X - 2 * 5 * borderScale),
+                (int)(size.Y - 2 * 5 * borderScale)
+            ),
+            c * alpha
         );
 
     }

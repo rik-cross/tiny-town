@@ -4,6 +4,7 @@
 //   Uses the milk MonoGame ECS engine
 //   -- Docs: rik-cross.github.io/monogame-milk
 
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 public static class GameSettings

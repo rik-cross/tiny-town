@@ -4,41 +4,54 @@
 //   Uses the milk MonoGame ECS engine
 //   -- Docs: rik-cross.github.io/monogame-milk
 
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using milk.Core;
 using milk.Components;
+using milk.Systems;
+using milk.UI;
 
 public static class PlayerEntity
 {
+
+    //
+    // Specifies direct player controls
+    // Which are:
+    // - WASD = movement
+    // - Enter = pick up entity
+    // - Right shift = drop inventory item
+    //
 
     public static void PlayerInputController(Scene scene, Entity entity, bool isSuspended)
     {
 
         //
-        // Position
+        // Movement
         //
 
         PhysicsComponent physicsComponent = entity.GetComponent<PhysicsComponent>();
+        InventoryComponent inventoryComponent = entity.GetComponent<InventoryComponent>();
 
         float dx = 0;
         float dy = 0;
 
         float speed = 50.0f;
 
-        if (isSuspended == false) {
-
-            if (scene.game.inputManager.IsKeyDown(Keys.W))
+        // Only move the player if input is not suspended
+        if (isSuspended == false)
+        {
+            // WASD to move
+            if (Milk.Controls.IsKeyDown(Keys.W))
                 dy -= speed;
-            if (scene.game.inputManager.IsKeyDown(Keys.A))
+            if (Milk.Controls.IsKeyDown(Keys.A))
                 dx -= speed;
-            if (scene.game.inputManager.IsKeyDown(Keys.S))
+            if (Milk.Controls.IsKeyDown(Keys.S))
                 dy += speed;
-            if (scene.game.inputManager.IsKeyDown(Keys.D))
+            if (Milk.Controls.IsKeyDown(Keys.D))
                 dx += speed;
-
         }
 
         physicsComponent.Velocity = new Vector2(dx, dy);
@@ -66,14 +79,33 @@ public static class PlayerEntity
             entity.State = "idle_left";
         if (state == "walk_right" && dx == 0 && dy == 0)
             entity.State = "idle_right";
+        
+        //
+        // Pick up and drop collectable entities
+        //
+
+        // Enter to pick up
+        if (Milk.Controls.IsKeyPressed(Keys.Enter))
+            Milk.Systems.GetSystem<CollectionSystem>().CollectNearestEntity(scene, entity);
+        
+        // Right shift to drop
+        if (Milk.Controls.IsKeyPressed(Keys.RightShift))
+        {
+            Entity removedEntity = entity.GetComponent<InventoryComponent>().RemoveEntity();
+            if (removedEntity != null)
+                Milk.Systems.GetSystem<CollectionSystem>().DropEntity(scene, entity, removedEntity, GameUtils.CalculateEntityDropPosition);
+        }
 
     }
 
+    // Player sprites
     public static Texture2D playerSpriteSheet = Milk.Content.Load<Texture2D>("images/player");
     public static List<List<Texture2D>> playerImagesList = Utilities.SplitTexture(playerSpriteSheet, new Vector2(48, 48));
 
+    // Create a new player entity
     public static Entity Create()
     {
+
         Entity playerEntity = new Entity(name: "player");
 
         playerEntity.AddComponent(
@@ -195,7 +227,6 @@ public static class PlayerEntity
             offset: new Vector2(17, 16)
         );
 
-
         playerEntity.GetComponent<SpriteComponent>().AddTextures(
             textureList: new List<Texture2D>() {
                 playerImagesList[7][0],
@@ -211,7 +242,6 @@ public static class PlayerEntity
             duration: 0.6f,
             offset: new Vector2(17, 16)
         );
-
 
         playerEntity.GetComponent<SpriteComponent>().AddTextures(
             textureList: new List<Texture2D>() {
@@ -231,11 +261,34 @@ public static class PlayerEntity
 
         playerEntity.AddComponent(new PhysicsComponent());
 
+        playerEntity.AddComponent(new InventoryComponent(
+            numberOfSlots: 8,
+            position: new Vector2(
+                Milk.Size.X / 2,
+                Milk.Size.Y - 20
+            ),
+            visible: false,
+            anchor: Anchor.BottomCenter,
+            customDrawMethod: GameUtils.DrawInventory,
+            inputActions: new Dictionary<Keys, Action>()
+            {
+                {Keys.D1, () => { playerEntity.GetComponent<InventoryComponent>().SelectedSlot = 0; }},
+                {Keys.D2, () => { playerEntity.GetComponent<InventoryComponent>().SelectedSlot = 1; }},
+                {Keys.D3, () => { playerEntity.GetComponent<InventoryComponent>().SelectedSlot = 2; }},
+                {Keys.D4, () => { playerEntity.GetComponent<InventoryComponent>().SelectedSlot = 3; }},
+                {Keys.D5, () => { playerEntity.GetComponent<InventoryComponent>().SelectedSlot = 4; }},
+                {Keys.D6, () => { playerEntity.GetComponent<InventoryComponent>().SelectedSlot = 5; }},
+                {Keys.D7, () => { playerEntity.GetComponent<InventoryComponent>().SelectedSlot = 6; }},
+                {Keys.D8, () => { playerEntity.GetComponent<InventoryComponent>().SelectedSlot = 7; }}
+            }
+        ));
+        
         playerEntity.AddComponent(new InputComponent(PlayerInputController));
 
         playerEntity.State = "idle_down";
 
         return playerEntity;
+
     }
 
 }
