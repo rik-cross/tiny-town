@@ -4,8 +4,9 @@
 //   Uses the milk MonoGame ECS engine
 //   -- Docs: rik-cross.github.io/monogame-milk
 
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using milk.Core;
+using milk.Systems;
 
 public static class GameSettings
 {
@@ -18,5 +19,36 @@ public static class GameSettings
     public static float sceneTransitionDuration = 0.5f;
     public static float scenePauseDuration = 0.1f;
     public static int buttonSpacing = 10;
+
+    public static void Set()
+    {
+
+        //
+        // Entity Prototypes
+        //
+
+        Milk.Entities.AddPrototype("apple", AppleEntity.Create);
+        Milk.Entities.AddPrototype("tree", TreeEntity.Create);
+
+        //
+        // Inventory Information
+        //
+
+        Milk.Systems.GetSystem<InventorySystem>().SetStackSize("apple", 10);
+        Milk.Systems.GetSystem<InventorySystem>().SetTexture("apple", AppleEntity.appleTexture);
+
+        //
+        // Crafting Information
+        //
+
+        Milk.Systems.GetSystem<CraftingSystem>().SetTexture("apple", AppleEntity.appleTexture);
+
+        //
+        // Collection Information
+        //
+        
+        Milk.Systems.GetSystem<CollectionSystem>().PositionCalculationMethod = GameUtils.CalculateEntityDropPosition;
+
+    }
 
 }

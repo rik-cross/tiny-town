@@ -74,6 +74,8 @@ public class PauseScene : Scene
             {
                 // Hide the player inventory
                 GameAssets.playerEntity.GetComponent<InventoryComponent>().Visible = false;
+                GameAssets.playerEntity.GetComponent<CraftingComponent>().Visible = false;
+                GameAssets.villageScene.POIMarkers.Hide();
                 // Change scenes
                 Milk.Scenes.SetScene(
                     [

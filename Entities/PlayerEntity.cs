@@ -41,7 +41,7 @@ public static class PlayerEntity
         float speed = 50.0f;
 
         // Only move the player if input is not suspended
-        if (isSuspended == false)
+        if (isSuspended == false && entity.GetComponent<CraftingComponent>().IsCrafting == false)
         {
             // WASD to move
             if (Milk.Controls.IsKeyDown(Keys.W))
@@ -93,17 +93,61 @@ public static class PlayerEntity
         {
             Entity removedEntity = entity.GetComponent<InventoryComponent>().RemoveEntity();
             if (removedEntity != null)
-                Milk.Systems.GetSystem<CollectionSystem>().DropEntity(scene, entity, removedEntity, GameUtils.CalculateEntityDropPosition);
+                Milk.Systems.GetSystem<CollectionSystem>().DropEntity(scene, entity, removedEntity);
         }
+
+        // C to craft
+        if (Milk.Controls.IsKeyPressed(Keys.C) && entity.GetComponent<CraftingComponent>().Active == true)
+        {
+            entity.GetComponent<CraftingComponent>().Craft();
+        }
+
+        if (Milk.Controls.IsKeyPressed(Keys.D1))
+        {
+            entity.GetComponent<InventoryComponent>().Active = true;
+            entity.GetComponent<CraftingComponent>().Active = false;
+        }
+
+        if (Milk.Controls.IsKeyPressed(Keys.D2))
+        {
+            entity.GetComponent<InventoryComponent>().Active = false;
+            entity.GetComponent<CraftingComponent>().Active = true;
+        }
+
+        if (Milk.Controls.IsKeyPressed(Keys.Left))
+        {
+            if (entity.GetComponent<InventoryComponent>().Active)
+                entity.GetComponent<InventoryComponent>().SelectLeft();
+        }
+
+        if (Milk.Controls.IsKeyPressed(Keys.Right))
+        {
+            if (entity.GetComponent<InventoryComponent>().Active)
+                entity.GetComponent<InventoryComponent>().SelectRight();
+        }
+
+        if (Milk.Controls.IsKeyPressed(Keys.Up))
+        {
+            if (entity.GetComponent<CraftingComponent>().Active)
+                entity.GetComponent<CraftingComponent>().SelectAbove();
+        }
+
+        if (Milk.Controls.IsKeyPressed(Keys.Down))
+        {
+            if (entity.GetComponent<CraftingComponent>().Active)
+                entity.GetComponent<CraftingComponent>().SelectBelow();
+        }
+
 
     }
 
     // Player sprites
     public static Texture2D playerSpriteSheet = Milk.Content.Load<Texture2D>("images/player");
     public static List<List<Texture2D>> playerImagesList = Utilities.SplitTexture(playerSpriteSheet, new Vector2(48, 48));
+    public static Texture2D heartEmojiTexture = Milk.Content.Load<Texture2D>("images/heart_emoji");
 
     // Create a new player entity
-    public static Entity Create()
+    public static Entity Create(Vector2? position = null)
     {
 
         Entity playerEntity = new Entity(name: "player");
@@ -265,12 +309,13 @@ public static class PlayerEntity
             numberOfSlots: 8,
             position: new Vector2(
                 Milk.Size.X / 2,
-                Milk.Size.Y - 20
+                Milk.Size.Y - 100
             ),
             visible: false,
-            anchor: Anchor.BottomCenter,
-            customDrawMethod: GameUtils.DrawInventory,
-            inputActions: new Dictionary<Keys, Action>()
+            active: true,
+            anchor: Anchor.TopCenter,
+            customDrawMethod: GameUtils.DrawInventory//,
+            /*inputActions: new Dictionary<Keys, Action>()
             {
                 {Keys.D1, () => { playerEntity.GetComponent<InventoryComponent>().SelectedSlot = 0; }},
                 {Keys.D2, () => { playerEntity.GetComponent<InventoryComponent>().SelectedSlot = 1; }},
@@ -280,9 +325,79 @@ public static class PlayerEntity
                 {Keys.D6, () => { playerEntity.GetComponent<InventoryComponent>().SelectedSlot = 5; }},
                 {Keys.D7, () => { playerEntity.GetComponent<InventoryComponent>().SelectedSlot = 6; }},
                 {Keys.D8, () => { playerEntity.GetComponent<InventoryComponent>().SelectedSlot = 7; }}
-            }
+            }*/
         ));
-        
+
+        playerEntity.GetComponent<InventoryComponent>().OnActivate = (InventoryComponent c, Scene s) =>
+        {
+            s.RemoveAnimationByName("invbar");
+            s.AddAnimation(
+                (float f)=>{ c.Position = new Vector2(
+                    c.Position.X,
+                    MathHelper.Lerp(c.Position.Y, Milk.Size.Y - 100, f)
+                ); },
+                1.0f,
+                name: "invbar"
+            );
+        };
+
+        playerEntity.GetComponent<InventoryComponent>().OnDeactivate = (InventoryComponent c, Scene s) =>
+        {
+            s.RemoveAnimationByName("invbar");
+            s.AddAnimation(
+                (float f)=>{ c.Position = new Vector2(
+                    c.Position.X,
+                    MathHelper.Lerp(c.Position.Y, Milk.Size.Y - 20, f)
+                ); },
+                1.0f,
+                name: "invbar"
+            );
+        };
+
+        playerEntity.AddComponent(new CraftingComponent(
+            position: new Vector2(Milk.Size.X - 20, Milk.Size.Y / 2),
+            anchor: Anchor.MiddleLeft,
+            //customDrawMethod: GameUtils.DrawCrafting,
+            numberOfSlots: 4,
+            slotsPerRow: 1,
+            active: false,
+            visible: false
+        ));
+
+        // TODO: move, this is just a test
+        playerEntity.GetComponent<CraftingComponent>().AddRecipe(Recipes.TestRecipe);
+
+        //playerEntity.GetComponent<InventoryComponent>().AddEntity(Milk.Entities.CreateFromPrototype("apple", Vector2.Zero));
+        //playerEntity.GetComponent<InventoryComponent>().AddEntity(Milk.Entities.CreateFromPrototype("apple", Vector2.Zero));
+        //playerEntity.GetComponent<InventoryComponent>().AddEntity(Milk.Entities.CreateFromPrototype("apple", Vector2.Zero));
+        //playerEntity.GetComponent<InventoryComponent>().AddEntity(Milk.Entities.CreateFromPrototype("apple", Vector2.Zero));
+
+        playerEntity.GetComponent<CraftingComponent>().OnActivate = (CraftingComponent c, Scene s) =>
+        {
+            s.RemoveAnimationByName("craftbar");
+            s.AddAnimation(
+                (float f)=>{ c.Position = new Vector2(
+                    MathHelper.Lerp(c.Position.X, Milk.Size.X - 100, f),
+                    c.Position.Y
+                ); },
+                1.0f,
+                name: "craftbar"
+            );
+        };
+
+        playerEntity.GetComponent<CraftingComponent>().OnDeactivate = (CraftingComponent c, Scene s) =>
+        {
+            s.RemoveAnimationByName("craftbar");
+            s.AddAnimation(
+                (float f)=>{ c.Position = new Vector2(
+                    MathHelper.Lerp(c.Position.X, Milk.Size.X - 20, f),
+                    c.Position.Y
+                ); },
+                1.0f,
+                name: "craftbar"
+            );
+        };
+
         playerEntity.AddComponent(new InputComponent(PlayerInputController));
 
         playerEntity.State = "idle_down";

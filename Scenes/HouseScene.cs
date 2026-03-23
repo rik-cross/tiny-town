@@ -73,6 +73,7 @@ public class HouseScene : Scene
     public override void OnEnter()
     {
         GameAssets.playerEntity.GetComponent<InventoryComponent>().Visible = true;
+        GameAssets.playerEntity.GetComponent<CraftingComponent>().Visible = true;
     }
 
 }

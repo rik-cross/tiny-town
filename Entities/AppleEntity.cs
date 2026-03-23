@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using milk.Core;
 using milk.Components;
+using milk.Systems;
 
 
 public static class AppleEntity
@@ -20,6 +21,7 @@ public static class AppleEntity
 
     public static Entity Create(Vector2? position = null)
     {
+
         Entity appleEntity = new Entity(
             type: "apple",
             tags: new List<string>() {"apple"}
@@ -39,17 +41,14 @@ public static class AppleEntity
         );
 
         appleEntity.AddComponent(new SpriteComponent(appleTexture));
-        appleEntity.GetComponent<SpriteComponent>().AddTextures(itemShadowTexture);
-
-        // Set apple inventory data
-        Milk.Systems.GetSystem<InventorySystem>().SetStackSize("apple", 10);
-        Milk.Systems.GetSystem<InventorySystem>().SetTexture("apple", appleTexture);
+        appleEntity.GetComponent<SpriteComponent>().AddTextures(itemShadowTexture);       
 
         appleEntity.AddComponent(new CollectableComponent());
 
         appleEntity.State = "default";
 
         return appleEntity;
+        
     }
 
 }

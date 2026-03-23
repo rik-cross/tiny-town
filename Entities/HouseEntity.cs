@@ -9,14 +9,13 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using milk.Core;
 using milk.Components;
-using System;
 
 public static class HouseEntity
 {
 
     public static Texture2D houseSpriteTexture = Milk.Content.Load<Texture2D>("images/house");
    
-    public static Entity Create(Vector2 position)
+    public static Entity Create(Vector2? position = null)
     {
         
         Entity houseEntity = new Entity(tags: new List<string>() {"building"});
@@ -47,6 +46,8 @@ public static class HouseEntity
                 {
                     if (entity2.Name != "player" || distance > 5)
                         return;
+                    
+                    GameAssets.villageScene.POIMarkers.Remove("house");
 
                     GameUtils.ChangePlayerScene(
                         fromScene: GameAssets.villageScene,

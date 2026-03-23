@@ -22,5 +22,6 @@ public static class GameAssets
     // Images
     public static Texture2D buttonSheet = Milk.Content.Load<Texture2D>("images/UI/buttons");
     public static Texture2D indicators = Milk.Content.Load<Texture2D>("images/UI/indicators");
+    public static Texture2D POIMarker = Milk.Content.Load<Texture2D>("images/UI/POIMarker");
 
 }

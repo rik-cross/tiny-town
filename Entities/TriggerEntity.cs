@@ -9,6 +9,10 @@ using Microsoft.Xna.Framework;
 using milk.Core;
 using milk.Components;
 
+/// <summary>
+/// Note that a TriggerEntity is just a utility class;
+/// a prototype cannot be added via Milk.Entities.AddPrototype()
+/// </summary>
 public static class TriggerEntity
 {
 

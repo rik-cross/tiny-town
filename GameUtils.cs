@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using milk.Core;
 using milk.Components;
 using milk.Transitions;
+using milk.Systems;
 
 public static class GameUtils
 {
@@ -142,6 +143,41 @@ public static class GameUtils
         return Vector2.Zero;
     }
 
+    public static void DrawEmote(Entity entity)
+    {
+        TransformComponent transformComponent = entity.GetComponent<TransformComponent>()!;
+        EmoteComponent emoteComponent = entity.GetComponent<EmoteComponent>()!;
+
+        Vector2 centerPosition = new Vector2(
+            transformComponent.Center,
+            transformComponent.Y - emoteComponent.Margin * 2
+        );
+
+        GameUI.DrawBox(
+            new Vector2(
+                centerPosition.X - emoteComponent.Size.X / 2 - emoteComponent.Margin,
+                centerPosition.Y - emoteComponent.Size.Y - emoteComponent.Margin
+            ),
+            new Vector2(
+                emoteComponent.Size.X + emoteComponent.Margin * 2,
+                emoteComponent.Size.Y + emoteComponent.Margin * 2
+            ),
+            alpha: emoteComponent.CurrrentAlpha
+        );
+
+        Milk.Graphics.Draw(
+            emoteComponent.TextureList[emoteComponent.Index],
+            new Rectangle(
+                (int)(centerPosition.X - emoteComponent.Size.X / 2),
+                (int)(centerPosition.Y - emoteComponent.Size.Y),
+                (int)(emoteComponent.Size.X),
+                (int)(emoteComponent.Size.Y)
+            ),
+            Color.White * emoteComponent.CurrrentAlpha
+        );
+
+    }
+
     public static void DrawInventory(InventoryComponent inventoryComponent)
     {
 
@@ -170,7 +206,7 @@ public static class GameUtils
                 inventoryComponent.SlotSize,
                 3,
                 inventoryComponent.Alpha,
-                i == inventoryComponent.SelectedSlot ? new Color(215, 215, 215) : Color.White
+                i == inventoryComponent.SelectedSlot && inventoryComponent.Active ? new Color(215, 215, 215) : Color.White
             );
 
             // Draw the texture of the entity in the slot
@@ -190,7 +226,6 @@ public static class GameUtils
                 if (timeSinceLastUpdate <= 0.25 && inventoryComponent.GetSlot(i).LastUpdateType == SlotChangeType.Added)
                 {
                     double x = Math.Clamp(1 - (timeSinceLastUpdate * 4), 0, 1);
-                    //Console.WriteLine(x);
                     r = new Rectangle(
                         (int)pos.X + 8 - (int)(x * 16),
                         (int)pos.Y + 8 - (int)(x * 16),
@@ -229,6 +264,82 @@ public static class GameUtils
                         pos.X + 7,
                         pos.Y
                     ),
+                    Color.White
+                );
+            }
+
+        }
+    }
+
+    public static void DrawCrafting(CraftingComponent craftingComponent)
+    {
+
+        Vector2 adjustedPosition = craftingComponent.CalculateTopLeftPositionFromAnchor();
+
+        GameUI.DrawBox(
+            adjustedPosition,
+            craftingComponent.Size,
+            3,
+            craftingComponent.Alpha
+        );
+
+        // Draw each slot
+        for (int i = 0; i < craftingComponent.NumberOfSlots; i++)
+        {
+
+            // Calculate slot top-left position
+            Vector2 pos = new Vector2(
+                adjustedPosition.X + craftingComponent.Margin + ( (i % craftingComponent.SlotsPerRow) * (craftingComponent.SlotSize.X + craftingComponent.Margin)),
+                (int)(adjustedPosition.Y + craftingComponent.Margin + ( (craftingComponent.Margin + craftingComponent.SlotSize.Y) * (Math.Floor((double)(i / craftingComponent.SlotsPerRow)))))
+            );
+
+            // Draw slot background
+            GameUI.DrawButtonDown(
+                pos,
+                craftingComponent.SlotSize,
+                3,
+                craftingComponent.Alpha,
+                i == craftingComponent.SelectedSlot && craftingComponent.Active ? new Color(215, 215, 215) : Color.White
+            );
+
+            // Draw the texture of the entity in the slot
+            // (if the slot is being used)
+
+            CraftingSystem craftingSystem = Milk.Systems.GetSystem<CraftingSystem>();
+
+            if (
+                craftingComponent.GetSlot(i).Recipe != null &&
+                craftingSystem.GetTexture(craftingComponent.GetSlot(i).Recipe.EntityTypeCreated) != null  
+            )
+            {
+
+                // Pulse if item has been recently added
+                double timeSinceLastUpdate = Milk.TotalGameTime - craftingComponent.GetSlot(i).LastUsed;
+                Rectangle r;
+                if (timeSinceLastUpdate <= 0.25)
+                {
+                    double x = Math.Clamp(1 - (timeSinceLastUpdate * 4), 0, 1);
+                    r = new Rectangle(
+                        (int)pos.X + 8 - (int)(x * 16),
+                        (int)pos.Y + 8 - (int)(x * 16),
+                        (int)craftingComponent.SlotSize.X - 16 + (int)(x * 32),
+                        (int)craftingComponent.SlotSize.Y - 16 + (int)(x * 32)
+                    );
+                }
+                else
+                {
+                    r = new Rectangle(
+                        (int)pos.X + 8,
+                        (int)pos.Y + 8,
+                        (int)craftingComponent.SlotSize.X - 16,
+                        (int)craftingComponent.SlotSize.Y - 16
+                    );
+                }
+
+                // Fit the texture to the available slot size
+                Utilities.DrawTextureToContainerSize(
+                    craftingSystem.GetTexture(craftingComponent.GetSlot(i).Recipe.EntityTypeCreated),
+                    r,
                     Color.White
                 );
             }

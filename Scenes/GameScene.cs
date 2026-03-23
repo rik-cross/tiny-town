@@ -4,7 +4,9 @@
 //   Uses the milk MonoGame ECS engine
 //   -- Docs: rik-cross.github.io/monogame-milk
 
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Tiled;
 using milk.Core;
@@ -27,13 +29,27 @@ public class GameScene : Scene
         AddEntity(HouseEntity.Create(new Vector2(107, 104)));
 
         // Add trees
-        AddEntity(TreeEntity.Create(new Vector2(210, 140)));
-        AddEntity(TreeEntity.Create(new Vector2(230, 120)));
+        AddEntity(Milk.Entities.CreateFromPrototype("tree", new Vector2(210, 140)));
+        AddEntity(Milk.Entities.CreateFromPrototype("tree", new Vector2(230, 120)));
 
         // Add apples
-        AddEntity(AppleEntity.Create(new Vector2(250, 180)));
-        AddEntity(AppleEntity.Create(new Vector2(260, 195)));
-        AddEntity(AppleEntity.Create(new Vector2(255, 160)));
+        AddEntity(Milk.Entities.CreateFromPrototype("apple", new Vector2(250, 180)));
+        AddEntity(Milk.Entities.CreateFromPrototype("apple", new Vector2(260, 195)));
+        AddEntity(Milk.Entities.CreateFromPrototype("apple", new Vector2(255, 160)));
+
+        // TODO: Remove this, and create a LOAD() method that's called early
+        GameAssets.POIMarker = Milk.Content.Load<Texture2D>("images/UI/POIMarker");
+
+        POIMarkers.Add(
+            new POIMarker(
+                targetPosition: new Vector2(107 + 46, 104 + 55),
+                size: new Vector2(21, 27),
+                texture: GameAssets.POIMarker,
+                name: "house",
+                text: "House",
+                visible: false
+            )
+        );
 
         //
         // Add camera
@@ -41,11 +57,12 @@ public class GameScene : Scene
 
         AddCamera(
             new Camera(
-                screenSize: Size,
+                screenPosition: new Vector2(0, 0),
+                screenSize: Milk.Size,
                 backgroundColor: new Color(155, 212, 195),
                 clampToMap: true,
                 name: "main camera",
-                zoom: 1.3f,
+                zoom: 4.5f,
                 trackedEntity: GameAssets.playerEntity,
                 followPercentage: 0.05f
             )
@@ -77,6 +94,8 @@ public class GameScene : Scene
     public override void OnEnter()
     {
         GameAssets.playerEntity.GetComponent<InventoryComponent>().Visible = true;
+        GameAssets.playerEntity.GetComponent<CraftingComponent>().Visible = true;
+        GameAssets.villageScene.POIMarkers.Show();
     }
 
 }

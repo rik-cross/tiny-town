@@ -6,16 +6,24 @@
 
 using Microsoft.Xna.Framework;
 using milk.Core;
+using milk.Systems;
 
 // Create a new game object
 using var game = new milk.Core.Game(
     title: "Tiny Town",
-    size: new Vector2(1280, 720)
+    size: new Vector2(1280, 720),
+    showSplash: false
 );
 
 // Add scenes to the game via an Init() method
 game.Init = () => {
+
+    GameSettings.Set();
+    // Load assets?
+
+    // Set start scenes
     Milk.Scenes.SetScene([GameAssets.menuScene, GameAssets.villageScene]);
+
 };
 
 // Run the game
