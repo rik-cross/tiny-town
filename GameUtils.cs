@@ -178,8 +178,10 @@ public static class GameUtils
 
     }
 
-    public static void DrawInventory(InventoryComponent inventoryComponent)
+    public static void DrawInventory(Entity entity)
     {
+
+        InventoryComponent inventoryComponent = entity.GetComponent<InventoryComponent>();
 
         Vector2 adjustedPosition = inventoryComponent.CalculateTopLeftPositionFromAnchor();
 
@@ -271,8 +273,11 @@ public static class GameUtils
         }
     }
 
-    public static void DrawCrafting(CraftingComponent craftingComponent)
+    public static void DrawCrafting(Entity entity)
     {
+
+        CraftingComponent craftingComponent = entity.GetComponent<CraftingComponent>();
+        InventoryComponent inventoryComponent = entity.GetComponent<InventoryComponent>();
 
         Vector2 adjustedPosition = craftingComponent.CalculateTopLeftPositionFromAnchor();
 
@@ -336,11 +341,22 @@ public static class GameUtils
                     );
                 }
 
+                bool canCraft = true;
+                //InventoryComponent inventoryComponent = entity.GetComponent<InventoryComponent>()!;
+                foreach(var ingredient in craftingComponent.inventory[i].Recipe!.Ingredients)
+                {
+                    if (inventoryComponent.NumberOfEntityType(ingredient.Key) < ingredient.Value)
+                    {
+                        canCraft = false;
+                        break;
+                    }
+                }
+
                 // Fit the texture to the available slot size
                 Utilities.DrawTextureToContainerSize(
                     craftingSystem.GetTexture(craftingComponent.GetSlot(i).Recipe.EntityTypeCreated),
                     r,
-                    Color.White
+                    canCraft == true ? Color.White : Color.White * 0.3f
                 );
             }
 

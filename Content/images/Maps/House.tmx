@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.1-99-gec89c545" orientation="orthogonal" renderorder="right-down" width="13" height="9" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="6">
+<map version="1.10" tiledversion="1.12.0-1-gd3530f437" orientation="orthogonal" renderorder="right-down" width="13" height="9" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="6">
  <tileset firstgid="1" source="../Tiles/SproutLandsTiles.tsx"/>
  <tileset firstgid="78" source="../Tiles/Grass_Tile_Layers.tsx"/>
  <tileset firstgid="155" source="../Tiles/Water Objects.tsx"/>
@@ -54,9 +54,9 @@
 </data>
  </layer>
  <objectgroup id="7" name="collisions">
-  <object id="2" x="0" y="0" width="208" height="16"/>
-  <object id="3" x="0" y="139" width="208" height="5"/>
-  <object id="4" x="0" y="0" width="5" height="144"/>
-  <object id="5" x="203" y="0" width="5" height="144"/>
+  <object id="2" name="top" x="0" y="0" width="208" height="16"/>
+  <object id="3" name="bottom" x="0" y="139" width="208" height="5"/>
+  <object id="4" name="left" x="0" y="0" width="5" height="144"/>
+  <object id="5" name="right" x="203" y="0" width="5" height="144"/>
  </objectgroup>
 </map>

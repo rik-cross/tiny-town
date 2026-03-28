@@ -4,6 +4,7 @@
 //   Uses the milk MonoGame ECS engine
 //   -- Docs: rik-cross.github.io/monogame-milk
 
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -40,8 +41,8 @@ public class GameScene : Scene
         // TODO: Remove this, and create a LOAD() method that's called early
         GameAssets.POIMarker = Milk.Content.Load<Texture2D>("images/UI/POIMarker");
 
-        POIMarkers.Add(
-            new POIMarker(
+        AddMarker(
+            new Marker(
                 targetPosition: new Vector2(107 + 46, 104 + 55),
                 size: new Vector2(21, 27),
                 texture: GameAssets.POIMarker,
@@ -81,7 +82,6 @@ public class GameScene : Scene
         // Press [Esc] to 'pause'
         if (game.inputManager.IsKeyPressed(Keys.Escape))
         {
-
             Scenes.SetScene(
                 new PauseScene(),
                 new TransitionFadeIn(duration: GameSettings.scenePauseDuration),
@@ -95,7 +95,7 @@ public class GameScene : Scene
     {
         GameAssets.playerEntity.GetComponent<InventoryComponent>().Visible = true;
         GameAssets.playerEntity.GetComponent<CraftingComponent>().Visible = true;
-        GameAssets.villageScene.POIMarkers.Show();
+        GameAssets.villageScene.ShowMarker();
     }
 
 }

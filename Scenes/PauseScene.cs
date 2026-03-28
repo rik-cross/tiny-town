@@ -75,7 +75,8 @@ public class PauseScene : Scene
                 // Hide the player inventory
                 GameAssets.playerEntity.GetComponent<InventoryComponent>().Visible = false;
                 GameAssets.playerEntity.GetComponent<CraftingComponent>().Visible = false;
-                GameAssets.villageScene.POIMarkers.Hide();
+                GameAssets.playerEntity.State = "idle_down";
+                GameAssets.villageScene.HideMarker();
                 // Change scenes
                 Milk.Scenes.SetScene(
                     [

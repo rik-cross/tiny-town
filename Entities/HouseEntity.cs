@@ -47,7 +47,7 @@ public static class HouseEntity
                     if (entity2.Name != "player" || distance > 5)
                         return;
                     
-                    GameAssets.villageScene.POIMarkers.Remove("house");
+                    GameAssets.villageScene.RemoveMarker("house");
 
                     GameUtils.ChangePlayerScene(
                         fromScene: GameAssets.villageScene,

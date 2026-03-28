@@ -330,34 +330,38 @@ public static class PlayerEntity
 
         playerEntity.GetComponent<InventoryComponent>().OnActivate = (InventoryComponent c, Scene s) =>
         {
-            s.RemoveAnimationByName("invbar");
-            s.AddAnimation(
-                (float f)=>{ c.Position = new Vector2(
-                    c.Position.X,
-                    MathHelper.Lerp(c.Position.Y, Milk.Size.Y - 100, f)
-                ); },
-                1.0f,
-                name: "invbar"
+            s.RemoveTween("invbar");
+            s.AddTween(
+                new Tween(
+                    action: (float f)=>{ c.Position = new Vector2(
+                        c.Position.X,
+                        MathHelper.Lerp(c.Position.Y, Milk.Size.Y - 100, f)
+                    ); },
+                    duration: 1.0f,
+                    name: "invbar"
+                )
             );
         };
 
         playerEntity.GetComponent<InventoryComponent>().OnDeactivate = (InventoryComponent c, Scene s) =>
         {
-            s.RemoveAnimationByName("invbar");
-            s.AddAnimation(
-                (float f)=>{ c.Position = new Vector2(
-                    c.Position.X,
-                    MathHelper.Lerp(c.Position.Y, Milk.Size.Y - 20, f)
-                ); },
-                1.0f,
-                name: "invbar"
+            s.RemoveTween("invbar");
+            s.AddTween(
+                new Tween(
+                    action: (float f)=>{ c.Position = new Vector2(
+                        c.Position.X,
+                        MathHelper.Lerp(c.Position.Y, Milk.Size.Y - 20, f)
+                    ); },
+                    duration: 1.0f,
+                    name: "invbar"    
+                )
             );
         };
 
         playerEntity.AddComponent(new CraftingComponent(
             position: new Vector2(Milk.Size.X - 20, Milk.Size.Y / 2),
             anchor: Anchor.MiddleLeft,
-            //customDrawMethod: GameUtils.DrawCrafting,
+            customDrawMethod: GameUtils.DrawCrafting,
             numberOfSlots: 4,
             slotsPerRow: 1,
             active: false,
@@ -367,34 +371,37 @@ public static class PlayerEntity
         // TODO: move, this is just a test
         playerEntity.GetComponent<CraftingComponent>().AddRecipe(Recipes.TestRecipe);
 
-        //playerEntity.GetComponent<InventoryComponent>().AddEntity(Milk.Entities.CreateFromPrototype("apple", Vector2.Zero));
-        //playerEntity.GetComponent<InventoryComponent>().AddEntity(Milk.Entities.CreateFromPrototype("apple", Vector2.Zero));
-        //playerEntity.GetComponent<InventoryComponent>().AddEntity(Milk.Entities.CreateFromPrototype("apple", Vector2.Zero));
-        //playerEntity.GetComponent<InventoryComponent>().AddEntity(Milk.Entities.CreateFromPrototype("apple", Vector2.Zero));
-
         playerEntity.GetComponent<CraftingComponent>().OnActivate = (CraftingComponent c, Scene s) =>
         {
-            s.RemoveAnimationByName("craftbar");
-            s.AddAnimation(
-                (float f)=>{ c.Position = new Vector2(
-                    MathHelper.Lerp(c.Position.X, Milk.Size.X - 100, f),
-                    c.Position.Y
-                ); },
-                1.0f,
-                name: "craftbar"
+            s.RemoveTween("craftbar");
+            s.AddTween(
+                new Tween(
+                    action: (float f)=>{ c.Position = new Vector2(
+                        MathHelper.Lerp(c.Position.X, Milk.Size.X - 100, f),
+                        c.Position.Y
+                    ); },
+                    duration: 1.0f,
+                    name: "craftbar"
+                )
+                
             );
         };
 
         playerEntity.GetComponent<CraftingComponent>().OnDeactivate = (CraftingComponent c, Scene s) =>
         {
-            s.RemoveAnimationByName("craftbar");
-            s.AddAnimation(
-                (float f)=>{ c.Position = new Vector2(
-                    MathHelper.Lerp(c.Position.X, Milk.Size.X - 20, f),
-                    c.Position.Y
-                ); },
-                1.0f,
-                name: "craftbar"
+            s.RemoveTween("craftbar");
+            s.AddTween(
+                new Tween(
+                    action: (float f)=>
+                    {
+                        c.Position = new Vector2(
+                            MathHelper.Lerp(c.Position.X, Milk.Size.X - 20, f),
+                            c.Position.Y
+                        );
+                    },
+                    duration: 1.0f,
+                    name: "craftbar"
+                )
             );
         };
 
